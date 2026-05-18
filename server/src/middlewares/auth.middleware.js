@@ -13,11 +13,13 @@ async function authAdminMiddleware(req, res, next) {
         
         const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
 
-        const admin = await prisma.admin.findUnique({
-            where: {id: decoded.id}
-        })
+        // const admin = await prisma.admin.findUnique({
+        //     where: {id: decoded.id}
+        // })
 
-        req.admin = admin
+        if (decoded.role !== 'admin'){
+            return res.status(403).json({message: "Access denied"})
+        }
 
         next();
     } catch (error) {

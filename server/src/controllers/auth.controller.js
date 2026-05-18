@@ -5,9 +5,9 @@ const prisma = require("../config/db");
 // User apis
 
 async function registerUser(req, res) {
-  const { username, email, password } = req.body;
+  const { username, email, password, role } = req.body;
 
-  if (!username || !email || !password) {
+  if (!username || !email || !password || !role) {
     return res.status(400).json({ message: "All fields are required" });
   }
 
@@ -28,12 +28,14 @@ async function registerUser(req, res) {
       username,
       email,
       password: hashedPassword,
+      role
     },
   });
 
   const token = jwt.sign(
     {
       id: user.id,
+      role: user.role
     },
     process.env.JWT_SECRET_KEY,
     {
@@ -47,6 +49,7 @@ async function registerUser(req, res) {
     message: "User registered successfully",
     username,
     email,
+    role
   });
 };
 
@@ -77,6 +80,7 @@ async function loginUser(req, res) {
   const token = jwt.sign(
     {
       id: user.id,
+      role: user.role
     },
     process.env.JWT_SECRET_KEY,
     {
@@ -90,6 +94,7 @@ async function loginUser(req, res) {
     message: "User logged in successfully",
     username: user.username,
     email: user.email,
+    role: user.role
   });
 };
 
@@ -100,105 +105,8 @@ function logoutUser(req, res) {
   });
 }
 
-//Admin apis
-
-async function registerAdmin(req, res) {
-  const { username, email, password } = req.body;
-
-  if (!username || !email || !password) {
-    return res.status(400).json({ message: "All fields are required" });
-  }
-
-  const existingAdmin = await prisma.admin.findUnique({
-    where: { email: email },
-  });
-
-  if (existingAdmin) {
-    return res.status(400).json({ message: "Admin already registered" });
-  }
-
-  const hashedPassword = await bcrypt.hash(password, 10);
-
-  const admin = await prisma.admin.create({
-    data: {
-      username,
-      email,
-      password: hashedPassword,
-    },
-  });
-
-  const token = jwt.sign(
-    {
-      id: admin.id,
-    },
-    process.env.JWT_SECRET_KEY,
-    {
-      expiresIn: "7d",
-    },
-  );
-
-  res.cookie("token", token);
-
-  res.status(200).json({
-    message: "Admin registered successfully",
-    username,
-    email,
-  });
-};
-
-async function loginAdmin(req, res) {
-  const { email, password } = req.body;
-
-  if (!email || !password) {
-    return res.status(400).json({ message: "All fields are required" });
-  }
-
-  const admin = await prisma.admin.findUnique({
-    where: {
-      email,
-    },
-  });
-
-  if (!admin) {
-    return res.status(400).json({ message: "Invalid credentials" });
-  }
-
-  const passMatch = await bcrypt.compare(password, admin.password);
-
-  if (!passMatch) {
-    return res.status(400).json({ message: "Invalid credentials" });
-  }
-
-  const token = jwt.sign(
-    {
-      id: admin.id,
-    },
-    process.env.JWT_SECRET_KEY,
-    {
-      expiresIn: "7d",
-    },
-  );
-
-  res.cookie("token", token);
-
-  res.status(200).json({
-    message: "Admin logged in successfully",
-    email,
-  });
-};
-
-function logoutAdmin(req, res) {
-  res.clearCookie("token");
-  res.status(200).json({
-    message: "Admin logged out successfully"
-  })
-}
-
 module.exports = {
   registerUser,
   loginUser,
   logoutUser,
-  registerAdmin,
-  loginAdmin,
-  logoutAdmin
 };

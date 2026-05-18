@@ -28,6 +28,35 @@ async function addMovie(req, res) {
     }
 }
 
+async function addShow(req, res) {
+
+    const { movieId, startTime } = req.body;
+
+    if (!movieId || !startTime) {
+        return res.status(400).json({ message: "All fields are required" });
+    }
+
+    try {
+        
+        const newShow = await prisma.show.create({
+            data: {
+                movieId,
+                startTime
+            }
+        })
+
+        res.status(200).json({
+            message: "Show added successfully",
+            show: newShow
+        })
+    } catch (error) {
+        res.status(400).json({
+            message:"Error adding show"
+        })
+    }
+}
+
 module.exports = {
-    addMovie
+    addMovie,
+    addShow
 }

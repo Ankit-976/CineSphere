@@ -12,14 +12,7 @@ model User {
   email     String   @unique
   username  String
   password  String
-  createdAt DateTime @default(now())
-}
-
-model admin {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  username  String
-  password  String
+  role      String   @default("user")
   createdAt DateTime @default(now())
 }
 
@@ -40,7 +33,7 @@ model Movie {
 model Show {
   id        Int      @id @default(autoincrement())
   startTime DateTime
-  movieId Int
-  movie   Movie @relation(fields: [movieId], references: [id])
+  movieId   Int
+  movie     Movie    @relation(fields: [movieId], references: [id])
   createdAt DateTime @default(now())
 }
