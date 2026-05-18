@@ -15,14 +15,22 @@ model User {
   createdAt DateTime @default(now())
 }
 
+model admin {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  username  String
+  password  String
+  createdAt DateTime @default(now())
+}
+
 model Movie {
-  id           Int      @id @default(autoincrement())
-  title        String
-  posterUrl    String?
-  description  String
-  duration     Int
-  releaseDate  DateTime
-  genre        String
-  language     String
-  createdAt    DateTime @default(now())
+  id          Int      @id @default(autoincrement())
+  title       String
+  posterUrl   String?
+  description String
+  duration    Int
+  releaseDate DateTime
+  genre       String
+  language    String
+  createdAt   DateTime @default(now())
 }
