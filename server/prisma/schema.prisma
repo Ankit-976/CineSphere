@@ -32,5 +32,15 @@ model Movie {
   releaseDate DateTime
   genre       String
   language    String
+  isActive    Boolean  @default(true)
   createdAt   DateTime @default(now())
+  shows       Show[]
+}
+
+model Show {
+  id        Int      @id @default(autoincrement())
+  startTime DateTime
+  movieId Int
+  movie   Movie @relation(fields: [movieId], references: [id])
+  createdAt DateTime @default(now())
 }
