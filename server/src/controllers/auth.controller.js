@@ -2,7 +2,9 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const prisma = require("../config/db");
 
-const registerUser = async (req, res) => {
+// User apis
+
+async function registerUser(req, res) {
   const { username, email, password } = req.body;
 
   if (!username || !email || !password) {
@@ -48,7 +50,7 @@ const registerUser = async (req, res) => {
   });
 };
 
-const loginUser = async (req, res) => {
+async function loginUser(req, res) {
 
   const { email, password } = req.body;
 
@@ -91,7 +93,16 @@ const loginUser = async (req, res) => {
   });
 };
 
-const registerAdmin = async (req, res) => {
+function logoutUser(req, res) {
+  res.clearCookie("token");
+  res.status(200).json({
+    message: "User logged out successfully",
+  });
+}
+
+//Admin apis
+
+async function registerAdmin(req, res) {
   const { username, email, password } = req.body;
 
   if (!username || !email || !password) {
@@ -135,7 +146,7 @@ const registerAdmin = async (req, res) => {
   });
 };
 
-const loginAdmin = async (req, res) => {
+async function loginAdmin(req, res) {
   const { email, password } = req.body;
 
   if (!email || !password) {
@@ -176,9 +187,18 @@ const loginAdmin = async (req, res) => {
   });
 };
 
+function logoutAdmin(req, res) {
+  res.clearCookie("token");
+  res.status(200).json({
+    message: "Admin logged out successfully"
+  })
+}
+
 module.exports = {
   registerUser,
   loginUser,
+  logoutUser,
   registerAdmin,
-  loginAdmin
+  loginAdmin,
+  logoutAdmin
 };
