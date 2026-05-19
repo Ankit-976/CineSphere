@@ -61,6 +61,48 @@ async function addShow(req, res) {
       },
     });
 
+    const seats = [];
+
+    for ( let row of ["A", "B"]) {
+        for (let i = 1; i <= 10; i++) {
+            seats.push({
+                seatNumber: `${row}${i}`,
+                type: "Premium",
+                price: 250,
+                showId: newShow.id
+            })
+            
+        }
+    }
+
+    for ( let row of ["C", "D", "E", "F"]) {
+        for (let i = 1; i <= 10; i++) {
+            seats.push({
+                seatNumber: `${row}${i}`,
+                type: "Normal",
+                price: 150,
+                showId: newShow.id
+            })
+            
+        }
+    }
+
+    for ( let row of ["R"]) {
+        for (let i = 1; i <= 10; i++) {
+            seats.push({
+                seatNumber: `${row}${i}`,
+                type: "Recliner",
+                price: 500,
+                showId: newShow.id
+            })
+            
+        }
+    }
+
+    await prisma.seat.createMany({
+        data: seats
+    })
+
     res.status(200).json({
       message: "Show added successfully",
       show: newShow,
@@ -100,25 +142,21 @@ async function getShows(req, res) {
     try {
         const id = req.params.movieId;
 
-        const shows = await prisma.movie.findUnique({
+        const shows = await prisma.show.findMany({
             where: {
-                id: parseInt(id)
+                movieId: parseInt(id)
             },
             include: {
-                shows: true
+                seats: true
             }
-        });
-        if (!shows) {
-            return res.status(404).json({
-                message: "No shows found"
-            });
-        }
+        })
+
         res.status(200).json({
             message: "Shows fetched successfully",
-            shows: shows.shows
-        });
+            shows: shows
+        })
     } catch (error) {
-        res.status(400).json({ message: "Error fetching shows" });
+        res.status(400).json({ message: "Error fetching shows", error: error.message });
     }
 }
 
