@@ -36,4 +36,16 @@ model Show {
   movieId   Int
   movie     Movie    @relation(fields: [movieId], references: [id])
   createdAt DateTime @default(now())
+  seats     Seat[]
+}
+
+model Seat {
+  id         Int     @id @default(autoincrement())
+  seatNumber String
+  type       String
+  price      Int
+  isBooked   Boolean @default(false)
+  showId     Int
+  show       Show @relation(fields: [showId], references: [id])
+  createdAt  DateTime @default(now())
 }
