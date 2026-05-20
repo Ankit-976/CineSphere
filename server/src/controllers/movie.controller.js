@@ -46,6 +46,51 @@ async function addMovie(req, res) {
   }
 }
 
+async function getMovies(req, res) {
+  try {
+    const movies = await prisma.movie.findMany({
+      include: {
+        shows: true,
+      },
+    });
+
+    if (!movies) {
+      return res.status(404).json({
+        message: "No movies found",
+      });
+    }
+
+    res.status(200).json({
+      message: "Movies fetched successfully",
+      movies: movies,
+    });
+  } catch (error) {
+    res.status(400).json({ message: "Error fetching movies" });
+  }
+}
+
+async function hideMovie(req, res) {
+  try {
+    const movie = await prisma.movie.update({
+      where: {
+        id: Number(req.params.id),
+      },
+      data: {
+        isActive: false,
+      },
+    });
+
+    res.status(200).json({
+      message: "Movie hidden successfully",
+      movie,
+    });
+  } catch (error) {
+    res
+      .status(400)
+      .json({ message: "Error hiding movie", error: error.message });
+  }
+}
+
 async function addShow(req, res) {
   const { movieId, startTime } = req.body;
 
@@ -63,45 +108,42 @@ async function addShow(req, res) {
 
     const seats = [];
 
-    for ( let row of ["A", "B"]) {
-        for (let i = 1; i <= 10; i++) {
-            seats.push({
-                seatNumber: `${row}${i}`,
-                type: "Premium",
-                price: 250,
-                showId: newShow.id
-            })
-            
-        }
+    for (let row of ["A", "B"]) {
+      for (let i = 1; i <= 10; i++) {
+        seats.push({
+          seatNumber: `${row}${i}`,
+          type: "Premium",
+          price: 250,
+          showId: newShow.id,
+        });
+      }
     }
 
-    for ( let row of ["C", "D", "E", "F"]) {
-        for (let i = 1; i <= 10; i++) {
-            seats.push({
-                seatNumber: `${row}${i}`,
-                type: "Normal",
-                price: 150,
-                showId: newShow.id
-            })
-            
-        }
+    for (let row of ["C", "D", "E", "F"]) {
+      for (let i = 1; i <= 10; i++) {
+        seats.push({
+          seatNumber: `${row}${i}`,
+          type: "Normal",
+          price: 150,
+          showId: newShow.id,
+        });
+      }
     }
 
-    for ( let row of ["R"]) {
-        for (let i = 1; i <= 10; i++) {
-            seats.push({
-                seatNumber: `${row}${i}`,
-                type: "Recliner",
-                price: 500,
-                showId: newShow.id
-            })
-            
-        }
+    for (let row of ["R"]) {
+      for (let i = 1; i <= 10; i++) {
+        seats.push({
+          seatNumber: `${row}${i}`,
+          type: "Recliner",
+          price: 500,
+          showId: newShow.id,
+        });
+      }
     }
 
     await prisma.seat.createMany({
-        data: seats
-    })
+      data: seats,
+    });
 
     res.status(200).json({
       message: "Show added successfully",
@@ -114,55 +156,34 @@ async function addShow(req, res) {
   }
 }
 
-async function getMovies(req, res) {
+async function getShows(req, res) {
   try {
-    const movies = await prisma.movie.findMany({
+    const id = req.params.movieId;
+
+    const shows = await prisma.show.findMany({
+      where: {
+        movieId: parseInt(id),
+      },
       include: {
-        shows: true,
+        seats: true,
       },
     });
 
-    if (!movies) {
-      return res.status(404).json({
-        message: "No movies found"
-      });
-    }
-
     res.status(200).json({
-        message:"Movies fetched successfully",
-        movies: movies
-    })
+      message: "Shows fetched successfully",
+      shows: shows,
+    });
   } catch (error) {
-    res.status(400).json({ message: "Error fetching movies" });
+    res
+      .status(400)
+      .json({ message: "Error fetching shows", error: error.message });
   }
-}
-
-async function getShows(req, res) {
-
-    try {
-        const id = req.params.movieId;
-
-        const shows = await prisma.show.findMany({
-            where: {
-                movieId: parseInt(id)
-            },
-            include: {
-                seats: true
-            }
-        })
-
-        res.status(200).json({
-            message: "Shows fetched successfully",
-            shows: shows
-        })
-    } catch (error) {
-        res.status(400).json({ message: "Error fetching shows", error: error.message });
-    }
 }
 
 module.exports = {
   addMovie,
-  addShow,
   getMovies,
-  getShows
+  hideMovie,
+  addShow,
+  getShows,
 };

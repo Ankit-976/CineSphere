@@ -7,6 +7,7 @@ const authMiddleware = require('../middlewares/auth.middleware')
 
 router.post('/addMovie', authMiddleware.authAdminMiddleware, movieController.addMovie);
 router.get('/getMovies', movieController.getMovies);
+router.post('/hideMovie/:id', authMiddleware.authAdminMiddleware, movieController.hideMovie)
 
 // Shows Routes
 
