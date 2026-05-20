@@ -13,10 +13,6 @@ async function authAdminMiddleware(req, res, next) {
         
         const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
 
-        // const admin = await prisma.admin.findUnique({
-        //     where: {id: decoded.id}
-        // })
-
         if (decoded.role !== 'admin'){
             return res.status(403).json({message: "Access denied"})
         }
@@ -27,6 +23,27 @@ async function authAdminMiddleware(req, res, next) {
     }
 }
 
+async function authUserMiddleware(req, res, next) {
+    
+    const token = req.cookies.token 
+
+    if (!token) {
+        return res.status(401).json({message:"Please login first"})
+    }
+
+    try {
+        
+        const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+
+        req.user = decoded
+
+        next();
+    } catch (error) {
+        res.status(401).json({message: "Invalid token"})
+    }
+}
+
 module.exports = {
     authAdminMiddleware,
+    authUserMiddleware
 }
