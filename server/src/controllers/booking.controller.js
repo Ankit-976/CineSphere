@@ -99,6 +99,10 @@ async function getBookedTicket(req, res) {
             }
         });
 
+        if (ticket.userId !== req.user.id) {
+            return res.status(403).json({message: "Unauthorized access to ticket"})
+        }
+
         res.status(200).json({
             message: "Ticket fetched successfully",
             ticket
