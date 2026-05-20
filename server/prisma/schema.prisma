@@ -14,6 +14,7 @@ model User {
   password  String
   role      String   @default("user")
   createdAt DateTime @default(now())
+  bookings  Booking[]
 }
 
 model Movie {
@@ -37,6 +38,7 @@ model Show {
   movie     Movie    @relation(fields: [movieId], references: [id])
   createdAt DateTime @default(now())
   seats     Seat[]
+  bookings  Booking[]
 }
 
 model Seat {
@@ -47,5 +49,17 @@ model Seat {
   isBooked   Boolean @default(false)
   showId     Int
   show       Show @relation(fields: [showId], references: [id])
+  createdAt  DateTime @default(now())
+  bookings   Booking[]
+}
+
+model Booking {
+  id         Int @id @default(autoincrement())
+  userId     Int
+  user       User @relation(fields: [userId], references: [id])
+  showId     Int
+  show       Show @relation(fields: [showId], references: [id])
+  totalPrice Int
+  seats      Seat[]
   createdAt  DateTime @default(now())
 }
