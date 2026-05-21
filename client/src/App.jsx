@@ -1,18 +1,20 @@
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
-import Signup from "./pages/Signup";
+import Register from "./pages/Register";
+import Login from './pages/Login'
 import { Routes, Route, useLocation } from "react-router-dom";
 
 const App = () => {
   const location = useLocation();
 
-  const hideNavbar = location.pathname === "/signup";
+  const hideNavbar = location.pathname === "/register" || location.pathname === "/login";
   return (
     <div>
       {!hideNavbar && <Navbar />}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </div>
   );

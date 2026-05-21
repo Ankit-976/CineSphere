@@ -45,7 +45,7 @@ const Navbar = () => {
             >
               Login
             </button>
-            <Link to={"/signup"}>
+            <Link to={"/register"}>
               <button className="bg-red-600 rounded-full py-2 px-6 flex items-center justify-center text-[0.9rem] cursor-pointer">
                 Sign Up
               </button>
