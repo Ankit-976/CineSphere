@@ -4,7 +4,7 @@ const UserDropdown = ({ setIsLoggedIn, setisUserDropActive }) => {
     setisUserDropActive(false);
   };
   return (
-    <div className="absolute bg-black top-15 right-25 flex flex-col gap-1 w-50 rounded-xl border-[0.1px] border-gray-600/50 font-['Nunito']">
+    <div className="absolute bg-black top-15 right-25 flex flex-col font-semibold gap-1 w-50 rounded-xl border-[0.1px] border-gray-600/50 font-['Nunito']">
       <div className="flex flex-col px-5 pt-4">
         <span className="text-[0.85rem]">Username</span>
         <span className="text-[0.8rem] text-gray-500/70">Emailusernahah</span>
