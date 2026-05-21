@@ -1,6 +1,7 @@
 import { useState } from "react";
 import logo from "../assets/logo.png";
 import UserDropdown from "./UserDropdown";
+import { Link } from "react-router-dom";
 const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isUserDropActive, setisUserDropActive] = useState(false);
@@ -10,8 +11,8 @@ const Navbar = () => {
   };
 
   const userDropdown = () => {
-    setisUserDropActive(!isUserDropActive)
-  }
+    setisUserDropActive(!isUserDropActive);
+  };
 
   return (
     <div className="py-3 flex justify-between items-center px-25 absolute top-0 left-0 w-full">
@@ -44,19 +45,27 @@ const Navbar = () => {
             >
               Login
             </button>
-            <button className="bg-red-600 rounded-full py-2 px-6 flex items-center justify-center text-[0.9rem] cursor-pointer">
-              Sign Up
-            </button>
+            <Link to={"/signup"}>
+              <button className="bg-red-600 rounded-full py-2 px-6 flex items-center justify-center text-[0.9rem] cursor-pointer">
+                Sign Up
+              </button>
+            </Link>
           </>
         ) : (
-          <button className="rounded-full py-2 px-3 flex bg-transparent border-[0.1px] border-gray-800 gap-2 items-center justify-center cursor-pointer" onClick={userDropdown}>
+          <button
+            className="rounded-full py-2 px-3 flex bg-transparent border-[0.1px] border-gray-800 gap-2 items-center justify-center cursor-pointer"
+            onClick={userDropdown}
+          >
             <span className="block rounded-full bg-emerald-800 h-6 w-6">U</span>
             <span>User</span>
           </button>
         )}
       </div>
       {isLoggedIn && isUserDropActive && (
-        <UserDropdown setIsLoggedIn={setIsLoggedIn} setisUserDropActive={setisUserDropActive}/>
+        <UserDropdown
+          setIsLoggedIn={setIsLoggedIn}
+          setisUserDropActive={setisUserDropActive}
+        />
       )}
     </div>
   );
