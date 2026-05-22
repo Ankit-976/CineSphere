@@ -1,7 +1,9 @@
 import logo from "../assets/logo.png";
 import bg from "../assets/bgSignup.png";
+import BackBtn from "../components/BackBtn";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { gsap } from "gsap";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -9,6 +11,33 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isPasswordSame, setIsPasswordSame] = useState(false);
+
+  useEffect(() => {
+
+    const tl = gsap.timeline()
+    
+    gsap.set("#backBtn",{opacity: 0})
+    gsap.set("#formHeading",{y:20, opacity: 0})
+    gsap.set(".inputs", {y: 50, opacity: 0})
+    tl.to("#formHeading",{
+      opacity: 1,
+      duration:0.5,
+      y:0,
+      ease: "sine.inOut"
+    })
+    tl.to(".inputs", {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      stagger: 0.2
+    })
+    tl.to("#backBtn",{
+      opacity: 1,
+      duration: 0.3
+    })
+
+  }, [])
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,6 +57,7 @@ const Register = () => {
 
   return (
     <div className="flex">
+      <BackBtn id="backBtn"/>
       <div className="flex items-center justify-center gap-2 cursor-pointer group absolute top-15 right-15">
         <img
           src={logo}
@@ -40,7 +70,7 @@ const Register = () => {
       </div>
       <div className="w-[50%] flex justify-center items-center">
         <div className="flex flex-col w-[60%] h-[60%] gap-7">
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2" id="formHeading">
             <span className="text-red-500/80 font-semibold font-['Nunito']  text-[0.8rem] tracking-widest">
               NEW FACE
             </span>
