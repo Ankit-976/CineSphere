@@ -3,8 +3,12 @@ import bg from "../assets/bgSignup.png";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { gsap } from "gsap";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import api from '../utils/Api'
 
-const Register = () => {
+const Login = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -32,8 +36,24 @@ const Register = () => {
     });
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const data = {
+      email: email,
+      password: password
+    }
+
+    try {
+      
+      const response = await api.post(`/auth/user/login`, data, { withCredentials: true });
+
+      navigate('/');
+
+      toast.success(response.data.message)
+    } catch (error) {
+      toast.error(error.response?.data?.message)
+    }
   };
 
   return (
@@ -95,7 +115,7 @@ const Register = () => {
                   setEmail(e.target.value);
                 }}
                 placeholder="wow@cinema.io"
-                className="bg-white/7 py-2 px-4 rounded-xl border border-white/10"
+                className="bg-white/7 py-2 px-4 rounded-xl border border-white/10 outline-none"
                 required
               />
             </div>
@@ -115,9 +135,17 @@ const Register = () => {
                   setPassword(e.target.value);
                 }}
                 placeholder="• • • • • • • • • •"
-                className="bg-white/7 py-2 px-4 rounded-xl border border-white/10"
+                className="bg-white/7 py-2 px-4 rounded-xl border border-white/10 outline-none"
                 required
               />
+            </div>
+            <div className="flex justify-between items-center inputs">
+              <span className="text-[0.9rem] font-semibold text-white/50 ">
+                <input type="checkbox" name="rememberMe" id="rememberMe" className="border accent-red-500"/> Remember Me
+              </span>
+              <span className="text-white/70 cursor-pointer">
+                Forget Password?
+              </span>
             </div>
               <span className="font-['Nunito'] hidden text-red-500/70">
                 Invalid Credentials
@@ -130,4 +158,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;

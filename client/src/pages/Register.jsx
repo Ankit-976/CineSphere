@@ -3,10 +3,16 @@ import bg from "../assets/bgSignup.png";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { gsap } from "gsap";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import api from '../utils/Api'
+
 
 const Register = () => {
+  const navigate = useNavigate()
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [role, setRole] = useState("user")
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isPasswordSame, setIsPasswordSame] = useState(false);
@@ -38,7 +44,7 @@ const Register = () => {
   }, [])
   
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
@@ -47,11 +53,26 @@ const Register = () => {
       setConfirmPassword("");
       return;
     }
-    alert(`Hello ${name}!`)
-    setName("");
-    setEmail("");
-    setPassword("");
-    setConfirmPassword("");
+
+    const data = {
+      username: name,
+      email: email,
+      password: password,
+      role: role
+    }
+
+    try {
+      const response = await api.post(`/auth/user/register`, data, {withCredentials: true});
+      
+      navigate('/')
+      toast.success(response.data.message);
+      
+    } catch (error) {
+      toast.error(error.response?.data?.message );
+      
+    }
+
+    
   };
 
   return (
@@ -99,7 +120,7 @@ const Register = () => {
                   setName(e.target.value);
                 }}
                 placeholder="john_wick92"
-                className="bg-white/7 py-2 px-4 rounded-xl border border-white/10"
+                className="bg-white/7 py-2 px-4 rounded-xl border border-white/10 outline-none"
                 required
               />
             </div>
@@ -111,7 +132,7 @@ const Register = () => {
                 EMAIL
               </label>
               <input
-                type="text"
+                type="email"
                 name="email"
                 id="email"
                 value={email}
@@ -119,9 +140,23 @@ const Register = () => {
                   setEmail(e.target.value);
                 }}
                 placeholder="wow@cinema.io"
-                className="bg-white/7 py-2 px-4 rounded-xl border border-white/10"
+                className="bg-white/7 py-2 px-4 rounded-xl border border-white/10 outline-none"
                 required
               />
+            </div>
+            <div className="flex flex-col gap-1 inputs">
+              <label
+                htmlFor="email"
+                className="text-white/60 text-[0.75rem] font-semibold font-['Nunito'] tracking-widest"
+              >
+                Role
+              </label>
+              <select name="role" id="role" defaultValue={"User"} onChange={(e) => {setRole(e.target.value)}}
+                className="bg-white/7 py-2 px-4 rounded-xl border border-white/10 text-white/60 outline-none"
+                >
+                <option value="User" className="bg-zinc-900 border-none">User</option>
+                <option value="Admin" className="bg-zinc-900">Admin</option>
+              </select>
             </div>
             <div className="flex flex-col gap-1 inputs">
               <label
@@ -139,7 +174,7 @@ const Register = () => {
                   setPassword(e.target.value);
                 }}
                 placeholder="• • • • • • • • • •"
-                className="bg-white/7 py-2 px-4 rounded-xl border border-white/10"
+                className="bg-white/7 py-2 px-4 rounded-xl border border-white/10 outline-none"
                 required
               />
             </div>
@@ -158,7 +193,7 @@ const Register = () => {
                   setConfirmPassword(e.target.value);
                 }}
                 placeholder="• • • • • • • • • •"
-                className="bg-white/7 py-2 px-4 rounded-xl border border-white/10"
+                className="bg-white/7 py-2 px-4 rounded-xl border border-white/10 outline-none"
                 required
               />
             </div>
