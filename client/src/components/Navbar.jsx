@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import logo from "../assets/logo.png";
 import UserDropdown from "./UserDropdown";
 import { Link } from "react-router-dom";
+import AuthContext from '../contexts/AuthContext'
+
 const Navbar = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
   const [isUserDropActive, setisUserDropActive] = useState(false);
 
   const userDropdown = () => {
