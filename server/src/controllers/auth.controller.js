@@ -105,6 +105,21 @@ async function loginUser(req, res) {
   });
 }
 
+async function getCurrentUser(req, res) {
+
+  const user = await prisma.user.findUnique({
+    where: {
+      id: req.user.id
+    }
+  })
+  res.status(200).json({
+    email: user.email,
+    username: user.username,
+    role: user.role
+  })
+  
+}
+
 function logoutUser(req, res) {
   res.clearCookie("token");
   res.status(200).json({
@@ -116,4 +131,5 @@ module.exports = {
   registerUser,
   loginUser,
   logoutUser,
+  getCurrentUser
 };
