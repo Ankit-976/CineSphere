@@ -58,7 +58,7 @@ async function registerUser(req, res) {
 }
 
 async function loginUser(req, res) {
-  const { email, password } = req.body;
+  const { email, password, rememberMe } = req.body;
 
   if (!email || !password) {
     return res.status(400).json({ message: "All fields are required" });
@@ -95,6 +95,7 @@ async function loginUser(req, res) {
     httpOnly: true,
     secure: false,
     sameSite: "Lax",
+    maxAge: rememberMe ? 7 * 24 * 60 * 60 * 1000 : 24 * 60 * 60 * 1000,
   });
 
   res.status(200).json({
@@ -106,18 +107,16 @@ async function loginUser(req, res) {
 }
 
 async function getCurrentUser(req, res) {
-
   const user = await prisma.user.findUnique({
     where: {
-      id: req.user.id
-    }
-  })
+      id: req.user.id,
+    },
+  });
   res.status(200).json({
     email: user.email,
     username: user.username,
-    role: user.role
-  })
-  
+    role: user.role,
+  });
 }
 
 function logoutUser(req, res) {
@@ -131,5 +130,5 @@ module.exports = {
   registerUser,
   loginUser,
   logoutUser,
-  getCurrentUser
+  getCurrentUser,
 };
