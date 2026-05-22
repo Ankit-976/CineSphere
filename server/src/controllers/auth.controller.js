@@ -28,14 +28,14 @@ async function registerUser(req, res) {
       username,
       email,
       password: hashedPassword,
-      role
+      role,
     },
   });
 
   const token = jwt.sign(
     {
       id: user.id,
-      role: user.role
+      role: user.role,
     },
     process.env.JWT_SECRET_KEY,
     {
@@ -43,18 +43,21 @@ async function registerUser(req, res) {
     },
   );
 
-  res.cookie("token", token);
+  res.cookie("token", token, {
+    httpOnly: true,
+    secure: false,
+    sameSite: "Lax",
+  });
 
   res.status(201).json({
     message: "User registered successfully",
     username,
     email,
-    role
+    role,
   });
-};
+}
 
 async function loginUser(req, res) {
-
   const { email, password } = req.body;
 
   if (!email || !password) {
@@ -80,7 +83,7 @@ async function loginUser(req, res) {
   const token = jwt.sign(
     {
       id: user.id,
-      role: user.role
+      role: user.role,
     },
     process.env.JWT_SECRET_KEY,
     {
@@ -88,15 +91,19 @@ async function loginUser(req, res) {
     },
   );
 
-  res.cookie("token", token);
+  res.cookie("token", token, {
+    httpOnly: true,
+    secure: false,
+    sameSite: "Lax",
+  });
 
   res.status(200).json({
     message: "User logged in successfully",
     username: user.username,
     email: user.email,
-    role: user.role
+    role: user.role,
   });
-};
+}
 
 function logoutUser(req, res) {
   res.clearCookie("token");
