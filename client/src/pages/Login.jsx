@@ -1,16 +1,19 @@
 import logo from "../assets/logo.png";
 import bg from "../assets/bgSignup.png";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { gsap } from "gsap";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import api from '../utils/Api'
+import AuthContext from '../contexts/AuthContext'
 
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(false)
+  const { setIsLoggedIn } = useContext(AuthContext)
 
   useEffect(() => {
     const tl = gsap.timeline();
@@ -41,16 +44,17 @@ const Login = () => {
 
     const data = {
       email: email,
-      password: password
+      password: password,
+      rememberMe: rememberMe
     }
 
     try {
       
-      const response = await api.post(`/auth/user/login`, data, { withCredentials: true });
-
+      const response = await api.post(`/auth/user/login`, data);
+      setIsLoggedIn(true)
       navigate('/');
 
-      toast.success(response.data.message)
+      toast.success(`Welcome Back ${response.data.username}`)
     } catch (error) {
       toast.error(error.response?.data?.message)
     }
@@ -116,6 +120,7 @@ const Login = () => {
                 }}
                 placeholder="wow@cinema.io"
                 className="bg-white/7 py-2 px-4 rounded-xl border border-white/10 outline-none"
+                autoComplete="off"
                 required
               />
             </div>
@@ -136,12 +141,20 @@ const Login = () => {
                 }}
                 placeholder="• • • • • • • • • •"
                 className="bg-white/7 py-2 px-4 rounded-xl border border-white/10 outline-none"
+                autoComplete="off"
                 required
               />
             </div>
             <div className="flex justify-between items-center inputs">
               <span className="text-[0.9rem] font-semibold text-white/50 ">
-                <input type="checkbox" name="rememberMe" id="rememberMe" className="border accent-red-500"/> Remember Me
+                <input 
+                type="checkbox"
+                name="rememberMe" 
+                id="rememberMe" 
+                className="border accent-red-500"
+                value={rememberMe}
+                onChange={(e) => setRememberMe(e.target.value)}
+                /> Remember Me
               </span>
               <span className="text-white/70 cursor-pointer">
                 Forget Password?

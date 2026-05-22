@@ -121,6 +121,7 @@ const Register = () => {
                 }}
                 placeholder="john_wick92"
                 className="bg-white/7 py-2 px-4 rounded-xl border border-white/10 outline-none"
+                autoComplete="off"
                 required
               />
             </div>
@@ -141,6 +142,7 @@ const Register = () => {
                 }}
                 placeholder="wow@cinema.io"
                 className="bg-white/7 py-2 px-4 rounded-xl border border-white/10 outline-none"
+                autoComplete="off"
                 required
               />
             </div>
@@ -175,6 +177,7 @@ const Register = () => {
                 }}
                 placeholder="• • • • • • • • • •"
                 className="bg-white/7 py-2 px-4 rounded-xl border border-white/10 outline-none"
+                autoComplete="off"
                 required
               />
             </div>
@@ -194,6 +197,7 @@ const Register = () => {
                 }}
                 placeholder="• • • • • • • • • •"
                 className="bg-white/7 py-2 px-4 rounded-xl border border-white/10 outline-none"
+                autoComplete="off"
                 required
               />
             </div>

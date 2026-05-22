@@ -1,7 +1,14 @@
 import { RiCouponLine, RiLogoutCircleRLine } from "@remixicon/react";
+import api from "../utils/Api";
+import AuthContext from "../contexts/AuthContext";
+import { useContext } from "react";
 
-const UserDropdown = ({ setIsLoggedIn, setisUserDropActive }) => {
-  const logoutBtn = () => {
+const UserDropdown = ({ setisUserDropActive }) => {
+
+  const {setIsLoggedIn} = useContext(AuthContext)
+  const logoutBtn = async () => {
+
+    await api.post('/auth/user/logout');
     setIsLoggedIn(false);
     setisUserDropActive(false);
   };
