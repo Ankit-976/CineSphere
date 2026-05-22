@@ -6,10 +6,6 @@ const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isUserDropActive, setisUserDropActive] = useState(false);
 
-  const loginBtn = () => {
-    setIsLoggedIn(true);
-  };
-
   const userDropdown = () => {
     setisUserDropActive(!isUserDropActive);
   };
@@ -39,12 +35,13 @@ const Navbar = () => {
       <div className="flex items-center gap-3 font-semibold">
         {!isLoggedIn ? (
           <>
-            <button
-              className="bg-transparent border-gray-800 border-[0.1px] rounded-full py-2 px-6 flex items-center justify-center text-[0.9rem] cursor-pointer"
-              onClick={loginBtn}
-            >
-              Login
-            </button>
+            <Link to={"/login"}>
+              <button
+                className="bg-transparent border-gray-800 border-[0.1px] rounded-full py-2 px-6 flex items-center justify-center text-[0.9rem] cursor-pointer"
+              >
+                Login
+              </button>
+            </Link>
             <Link to={"/register"}>
               <button className="bg-red-600 rounded-full py-2 px-6 flex items-center justify-center text-[0.9rem] cursor-pointer">
                 Sign Up

@@ -1,6 +1,5 @@
 import logo from "../assets/logo.png";
 import bg from "../assets/bgSignup.png";
-import BackBtn from "../components/BackBtn";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { gsap } from "gsap";
@@ -57,7 +56,6 @@ const Register = () => {
 
   return (
     <div className="flex">
-      <BackBtn id="backBtn"/>
       <div className="flex items-center justify-center gap-2 cursor-pointer group absolute top-15 right-15">
         <img
           src={logo}
