@@ -15,7 +15,7 @@ const Navbar = () => {
   if (loading) return null;
 
   return (
-    <div className="py-3 flex justify-between items-center px-25 absolute top-0 left-0 w-full">
+    <div className="py-3 z-999 flex justify-between items-center px-25 absolute top-0 left-0 w-full">
       <a
         href="/"
         className="flex items-center justify-center gap-2 cursor-pointer group"
@@ -40,7 +40,7 @@ const Navbar = () => {
         {!isLoggedIn ? (
           <>
             <Link to={"/login"}>
-              <button className="bg-transparent border-gray-800 border-[0.1px] rounded-full py-2 px-6 flex items-center justify-center text-[0.9rem] cursor-pointer">
+              <button className="bg-black/10 border-gray-800 border-[0.1px] rounded-full py-2 px-6 flex items-center justify-center text-[0.9rem] cursor-pointer">
                 Login
               </button>
             </Link>
@@ -52,10 +52,10 @@ const Navbar = () => {
           </>
         ) : (
           <button
-            className="rounded-full py-2 px-3 flex bg-transparent border-[0.1px] border-gray-800 gap-2 items-center justify-center cursor-pointer"
+            className="rounded-full py-2 px-3 flex bg-black/80 border-[0.1px] border-gray-800 gap-2 items-center justify-center cursor-pointer"
             onClick={userDropdown}
           >
-            <span className="block rounded-full bg-emerald-800 h-6 w-6">U</span>
+            <span className="block rounded-full bg-red-500 h-6 w-6">U</span>
             <span>User</span>
           </button>
         )}

@@ -1,5 +1,4 @@
 import logo from "../assets/logo.png";
-import bg from "../assets/bgSignup.png";
 import { Link } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { gsap } from "gsap";
@@ -63,8 +62,7 @@ const Login = () => {
   return (
     <div className="flex">
       <div
-        className="h-screen w-[50%] bg-cover bg-center "
-        style={{ backgroundImage: `url(${bg})` }}
+        className="h-screen w-[50%]"
       >
         <div className="flex items-center justify-center gap-2 cursor-pointer group absolute top-15 right-15">
           <img
