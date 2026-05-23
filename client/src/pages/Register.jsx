@@ -15,7 +15,6 @@ const Register = () => {
   const [role, setRole] = useState("user")
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [isPasswordSame, setIsPasswordSame] = useState(false);
 
   useEffect(() => {
 
@@ -48,7 +47,7 @@ const Register = () => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      setIsPasswordSame(true)
+      toast.error("Passwords do not match");
       setPassword("");
       setConfirmPassword("");
       return;
@@ -65,7 +64,7 @@ const Register = () => {
       const response = await api.post(`/auth/user/register`, data, {withCredentials: true});
       
       navigate('/')
-      toast.success(response.data.message);
+      toast.success(`Welcome ${response.data.username}`);
       
     } catch (error) {
       toast.error(error.response?.data?.message );
@@ -201,7 +200,6 @@ const Register = () => {
                 required
               />
             </div>
-            {isPasswordSame && (<span className="font-['Nunito'] text-red-500/70">Set same password</span>)}
             <button type="submit"></button>
           </form>
         </div>

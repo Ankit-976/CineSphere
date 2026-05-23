@@ -2,15 +2,17 @@ import { useState, useContext } from "react";
 import logo from "../assets/logo.png";
 import UserDropdown from "./UserDropdown";
 import { Link } from "react-router-dom";
-import AuthContext from '../contexts/AuthContext'
+import AuthContext from "../contexts/AuthContext";
 
 const Navbar = () => {
-  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
+  const { isLoggedIn, setIsLoggedIn, loading } = useContext(AuthContext);
   const [isUserDropActive, setisUserDropActive] = useState(false);
 
   const userDropdown = () => {
     setisUserDropActive(!isUserDropActive);
   };
+
+  if (loading) return null;
 
   return (
     <div className="py-3 flex justify-between items-center px-25 absolute top-0 left-0 w-full">
@@ -38,9 +40,7 @@ const Navbar = () => {
         {!isLoggedIn ? (
           <>
             <Link to={"/login"}>
-              <button
-                className="bg-transparent border-gray-800 border-[0.1px] rounded-full py-2 px-6 flex items-center justify-center text-[0.9rem] cursor-pointer"
-              >
+              <button className="bg-transparent border-gray-800 border-[0.1px] rounded-full py-2 px-6 flex items-center justify-center text-[0.9rem] cursor-pointer">
                 Login
               </button>
             </Link>
@@ -60,10 +60,11 @@ const Navbar = () => {
           </button>
         )}
       </div>
-      {isLoggedIn && isUserDropActive && (
+      {isLoggedIn && (
         <UserDropdown
           setIsLoggedIn={setIsLoggedIn}
           setisUserDropActive={setisUserDropActive}
+          isUserDropActive={isUserDropActive}
         />
       )}
     </div>
