@@ -1,11 +1,12 @@
 import logo from "../assets/logo.png";
 import bg from "../assets/bgSignup.png";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { gsap } from "gsap";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import api from '../utils/Api'
+import AuthContext from '../contexts/AuthContext'
 
 
 const Register = () => {
@@ -15,6 +16,7 @@ const Register = () => {
   const [role, setRole] = useState("user")
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const { setIsLoggedIn } = useContext(AuthContext)
 
   useEffect(() => {
 
@@ -62,7 +64,7 @@ const Register = () => {
 
     try {
       const response = await api.post(`/auth/user/register`, data, {withCredentials: true});
-      
+      setIsLoggedIn(true)
       navigate('/')
       toast.success(`Welcome ${response.data.username}`);
       
