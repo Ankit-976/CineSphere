@@ -5,7 +5,7 @@ import { useContext, useEffect, useRef } from "react";
 import { gsap } from "gsap";
 
 const UserDropdown = ({ setisUserDropActive, isUserDropActive }) => {
-  const { setIsLoggedIn } = useContext(AuthContext);
+  const { setIsLoggedIn, user } = useContext(AuthContext);
   const dropdownRef = useRef(null);
   const logoutBtn = async () => {
     await api.post("/auth/user/logout");
@@ -48,8 +48,8 @@ const UserDropdown = ({ setisUserDropActive, isUserDropActive }) => {
       className="absolute bg-black top-15 right-25 flex flex-col font-semibold gap-2 w-55 rounded-xl border-[0.1px] border-gray-600/50 font-['Nunito']"
     >
       <div className="flex flex-col px-5 pt-3">
-        <span className="text-[0.88rem]">Username</span>
-        <span className="text-[0.85rem] text-gray-500/70">Emailusernahah</span>
+        <span className="text-[0.88rem]">{user.username}</span>
+        <span className="text-[0.85rem] text-gray-500/70">{user.email}</span>
       </div>
       <hr className="w-[90%] m-auto text-gray-600/60" />
       <div className="flex flex-col text-[0.86rem] px-5 pb-3 gap-2">

@@ -5,8 +5,9 @@ import { Link } from "react-router-dom";
 import AuthContext from "../contexts/AuthContext";
 
 const Navbar = () => {
-  const { isLoggedIn, setIsLoggedIn, loading } = useContext(AuthContext);
+  const { isLoggedIn, setIsLoggedIn, loading, user } = useContext(AuthContext);
   const [isUserDropActive, setisUserDropActive] = useState(false);
+  
 
   const userDropdown = () => {
     setisUserDropActive(!isUserDropActive);
@@ -55,8 +56,8 @@ const Navbar = () => {
             className="rounded-full py-2 px-3 flex bg-black/80 border-[0.1px] border-gray-800 gap-2 items-center justify-center cursor-pointer"
             onClick={userDropdown}
           >
-            <span className="block rounded-full bg-red-500 h-6 w-6">U</span>
-            <span>User</span>
+            <span className=" flex justify-center items-center rounded-full bg-red-500 h-6 w-6">{(user.username).slice(0, 1).toUpperCase()}</span>
+            <span>{user.username}</span>
           </button>
         )}
       </div>

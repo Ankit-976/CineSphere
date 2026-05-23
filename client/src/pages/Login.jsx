@@ -29,12 +29,12 @@ const Login = () => {
     tl.to(".inputs", {
       opacity: 1,
       y: 0,
-      duration: 0.8,
-      stagger: 0.2,
+      duration: 0.5,
+      stagger: 0.1,
     });
     tl.to("#backBtn", {
       opacity: 1,
-      duration: 0.3,
+      duration: 0.2,
     });
   }, []);
 
