@@ -111,12 +111,13 @@ async function getCurrentUser(req, res) {
     where: {
       id: req.user.id,
     },
+    select: {
+      username: true,
+      email: true,
+      role: true
+    }
   });
-  res.status(200).json({
-    email: user.email,
-    username: user.username,
-    role: user.role,
-  });
+  res.status(200).json({ user: user });
 }
 
 function logoutUser(req, res) {
