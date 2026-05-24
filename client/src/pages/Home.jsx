@@ -85,7 +85,6 @@ const Home = () => {
   };
 
   useEffect(() => {
-
     if (!movies.length) return;
     gsap.set(".movieline", { scaleX: 0, transformOrigin: "left" });
     gsap.to(`#movieline${currentIndex}`, {
@@ -150,7 +149,13 @@ const Home = () => {
               className="flex gap-5 text-[#8a8a8a] font-[Nunito] text-[0.9rem] font-bold"
             >
               <span>⭐️ 8.2/10</span>
-              <span>{currentMovie?.duration || "Duration"}</span>
+              <span>
+                {currentMovie?.duration
+                  ? `${Math.floor(currentMovie.duration / 60)}h${
+                      currentMovie.duration % 60
+                    }m`
+                  : "Duration"}
+              </span>
               <span>{currentMovie?.language || "Language"}</span>
             </div>
             <div className="flex gap-3 font-semibold">
