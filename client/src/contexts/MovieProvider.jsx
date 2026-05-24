@@ -19,7 +19,6 @@ const MovieProvider = ({ children }) => {
     
 
     }, [])
-    console.log(moviesfetched);
     
   return (
     <MovieContext.Provider
