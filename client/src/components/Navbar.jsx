@@ -1,22 +1,48 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect, useRef } from "react";
 import logo from "../assets/logo.png";
 import UserDropdown from "./UserDropdown";
 import { Link } from "react-router-dom";
 import AuthContext from "../contexts/AuthContext";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import  gsap  from 'gsap'
 
+gsap.registerPlugin(ScrollTrigger);
 const Navbar = () => {
   const { isLoggedIn, setIsLoggedIn, loading, user } = useContext(AuthContext);
   const [isUserDropActive, setisUserDropActive] = useState(false);
-  
+  const navbarRef = useRef(null);
 
   const userDropdown = () => {
     setisUserDropActive(!isUserDropActive);
   };
 
+useEffect(() => {
+  if (loading) return;
+
+  if (!navbarRef.current) return;
+
+  const ctx = gsap.context(() => {
+    gsap.to(navbarRef.current, {
+      backgroundColor: "#000",
+      ease: "none",
+      scrollTrigger: {
+        trigger: document.body,
+        start: "top+=200 top",
+        end: "top+=100 top",
+        scrub: 1,
+      }
+    });
+  });
+
+  return () => ctx.revert();
+}, [loading]);
+
   if (loading) return null;
 
   return (
-    <div className="py-3 z-999 flex justify-between items-center px-25 absolute top-0 left-0 w-full">
+    <div 
+    ref={navbarRef}
+    className="py-1 z-999 flex justify-between items-center px-25 fixed top-0 left-0 w-full">
       <a
         href="/"
         className="flex items-center justify-center gap-2 cursor-pointer group"
@@ -56,7 +82,9 @@ const Navbar = () => {
             className="rounded-full py-2 px-3 flex bg-black/80 border-[0.1px] border-gray-800 gap-2 items-center justify-center cursor-pointer"
             onClick={userDropdown}
           >
-            <span className=" flex justify-center items-center rounded-full bg-red-500 h-6 w-6">{(user.username).slice(0, 1).toUpperCase()}</span>
+            <span className=" flex justify-center items-center rounded-full bg-red-500 h-6 w-6">
+              {user.username.slice(0, 1).toUpperCase()}
+            </span>
             <span>{user.username}</span>
           </button>
         )}
