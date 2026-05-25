@@ -1,10 +1,10 @@
 import Navbar from "./components/Navbar";
-import Home from "./pages/Home";
 import Register from "./pages/Register";
 import BackBtn from './components/BackBtn'
 import Login from './pages/Login'
 
 import { Routes, Route, useLocation } from "react-router-dom";
+import Layout from "./Layout";
 
 const App = () => {
   const location = useLocation();
@@ -15,7 +15,7 @@ const App = () => {
       {location.pathname !== "/" && <BackBtn />}
       {!hideNavbar && <Navbar />}
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Layout />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
       </Routes>

@@ -6,7 +6,6 @@ import {
 import { useEffect, useState, useRef, useContext } from "react";
 import { gsap } from "gsap";
 import MovieContext from "../contexts/MovieContext";
-import GenreBox from "../components/GenreBox";
 
 const Home = () => {
   const { moviesfetched } = useContext(MovieContext);
@@ -113,10 +112,10 @@ const Home = () => {
 
   return (
     <>
-      <div className="h-fit">
+      <div className="h-screen">
         <div
           ref={bgRef}
-          className="h-[90%]  w-full bg-cover  bg-top absolute top-0 left-0"
+          className="h-[90%]  w-full bg-cover  bg-top"
           style={{ backgroundImage: `url(${currentMovie?.posterUrl})` }}
         >
           <div className="text-white h-full flex flex-col backdrop-brightness-75 px-25 py-20 justify-end gap-6">
@@ -207,7 +206,6 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <GenreBox />
         </div>
       </div>
     </>

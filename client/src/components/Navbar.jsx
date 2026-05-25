@@ -42,7 +42,7 @@ useEffect(() => {
   return (
     <div 
     ref={navbarRef}
-    className="py-1 z-999 flex justify-between items-center px-25 fixed top-0 left-0 w-full">
+    className="py-2 z-999 flex justify-between items-center px-25 fixed top-0 left-0 w-full">
       <a
         href="/"
         className="flex items-center justify-center gap-2 cursor-pointer group"
