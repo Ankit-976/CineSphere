@@ -16,7 +16,7 @@ const Register = () => {
   const [role, setRole] = useState("user")
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const { setIsLoggedIn } = useContext(AuthContext)
+  const { setIsLoggedIn, setUser } = useContext(AuthContext)
 
   useEffect(() => {
 
@@ -65,8 +65,9 @@ const Register = () => {
     try {
       const response = await api.post(`/auth/user/register`, data, {withCredentials: true});
       setIsLoggedIn(true)
+      setUser(response.data.user)
       navigate('/')
-      toast.success(`Welcome ${response.data.username}`);
+      toast.success(`Welcome ${response.data.user.username}`);
       
     } catch (error) {
       toast.error(error.response?.data?.message );

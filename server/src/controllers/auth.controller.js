@@ -23,7 +23,7 @@ async function registerUser(req, res) {
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
-  const user = await prisma.user.create({
+  const userResponse = await prisma.user.create({
     data: {
       username,
       email,
@@ -34,8 +34,8 @@ async function registerUser(req, res) {
 
   const token = jwt.sign(
     {
-      id: user.id,
-      role: user.role,
+      id: userResponse.id,
+      role: userResponse.role,
     },
     process.env.JWT_SECRET_KEY,
     {
@@ -49,11 +49,15 @@ async function registerUser(req, res) {
     sameSite: "Lax",
   });
 
+  const user = {
+    username: userResponse.username,
+    email: userResponse.email,
+    role: userResponse.role
+  }
+
   res.status(201).json({
     message: "User registered successfully",
-    username,
-    email,
-    role,
+    user: user
   });
 }
 
@@ -64,17 +68,17 @@ async function loginUser(req, res) {
     return res.status(400).json({ message: "All fields are required" });
   }
 
-  const user = await prisma.user.findUnique({
+  const userResponse = await prisma.user.findUnique({
     where: {
       email,
     },
   });
 
-  if (!user) {
+  if (!userResponse) {
     return res.status(400).json({ message: "Invalid credentials" });
   }
 
-  const passMatch = await bcrypt.compare(password, user.password);
+  const passMatch = await bcrypt.compare(password, userResponse.password);
 
   if (!passMatch) {
     return res.status(400).json({ message: "Invalid credentials" });
@@ -82,8 +86,8 @@ async function loginUser(req, res) {
 
   const token = jwt.sign(
     {
-      id: user.id,
-      role: user.role,
+      id: userResponse.id,
+      role: userResponse.role,
     },
     process.env.JWT_SECRET_KEY,
     {
@@ -98,11 +102,15 @@ async function loginUser(req, res) {
     maxAge: rememberMe ? 7 * 24 * 60 * 60 * 1000 : 24 * 60 * 60 * 1000,
   });
 
+  const user = {
+    username: userResponse.username,
+    email: userResponse.email,
+    role: userResponse.role,
+  };
+
   res.status(200).json({
     message: "User logged in successfully",
-    username: user.username,
-    email: user.email,
-    role: user.role,
+    user: user
   });
 }
 
@@ -114,8 +122,8 @@ async function getCurrentUser(req, res) {
     select: {
       username: true,
       email: true,
-      role: true
-    }
+      role: true,
+    },
   });
   res.status(200).json({ user: user });
 }

@@ -12,7 +12,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false)
-  const { setIsLoggedIn } = useContext(AuthContext)
+  const { setIsLoggedIn, setUser } = useContext(AuthContext)
 
   useEffect(() => {
     const tl = gsap.timeline();
@@ -51,9 +51,10 @@ const Login = () => {
       
       const response = await api.post(`/auth/user/login`, data);
       setIsLoggedIn(true)
+      setUser(response.data.user)
       navigate('/');
 
-      toast.success(`Welcome Back ${response.data.username}`)
+      toast.success(`Welcome Back ${response.data.user.username}`)
     } catch (error) {
       toast.error(error.response?.data?.message)
     }
