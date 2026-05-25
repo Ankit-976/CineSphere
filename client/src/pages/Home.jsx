@@ -112,10 +112,10 @@ const Home = () => {
 
   return (
     <>
-      <div className="h-screen">
+      <div className="h-200">
         <div
           ref={bgRef}
-          className="h-[90%]  w-full bg-cover  bg-top"
+          className="h-full  w-full bg-cover  bg-top"
           style={{ backgroundImage: `url(${currentMovie?.posterUrl})` }}
         >
           <div className="text-white h-full flex flex-col backdrop-brightness-75 px-25 py-20 justify-end gap-6">

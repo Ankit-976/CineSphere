@@ -8,3 +8,7 @@ body {
 body::-webkit-scrollbar{
     display: none;
 }
+
+.moviescrollbar::-webkit-scrollbar{
+    display: none;
+}
