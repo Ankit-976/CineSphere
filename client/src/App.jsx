@@ -5,6 +5,7 @@ import Login from './pages/Login'
 
 import { Routes, Route, useLocation } from "react-router-dom";
 import Layout from "./Layout";
+import Movie from "./pages/Movie";
 
 const App = () => {
   const location = useLocation();
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="/" element={<Layout />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/movies" element={<Movie />} />
       </Routes>
     </div>
   );

@@ -1,6 +1,6 @@
 function GenreBox() {
   return (
-    <div className=" flex flex-col gap-8 w-[85%] mx-auto -translate-y-18 rounded-2xl p-7 bg-[#101010] border border-[#252525]">
+    <div className=" flex flex-col gap-8 w-[85%] mx-auto rounded-2xl p-7 bg-[#101010] border border-[#252525]">
       <div>
         <div className="flex flex-col">
           <span className="text-red-500 font-bold font-[Nunito] text-[0.9rem]">

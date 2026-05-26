@@ -6,7 +6,9 @@ const Layout = () => {
   return (
     <>
       <Home />
+      <div className="w-full -translate-y-18 bg-transparent">
       <GenreBox />
+      </div>
       <MovieSection />
     </>
   );

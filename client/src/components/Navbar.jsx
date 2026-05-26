@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect, useRef } from "react";
 import logo from "../assets/logo.png";
 import UserDropdown from "./UserDropdown";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import AuthContext from "../contexts/AuthContext";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import  gsap  from 'gsap'
@@ -57,10 +57,10 @@ useEffect(() => {
         </span>
       </a>
       <ul className="flex gap-15 text-[0.9rem] text-gray-500 font-semibold">
-        <li className="text-gray-300 cursor-pointer">Home</li>
-        <li className="hover:text-gray-300 cursor-pointer">Movies</li>
+        <NavLink to={'/'} className={({ isActive }) => `hover:text-gray-300 cursor-pointer ${isActive && 'text-gray-300'}`}>Home</NavLink>
+        <NavLink to={'/movies'} className={({ isActive }) => `hover:text-gray-300 cursor-pointer ${isActive && 'text-gray-300'}`}>Movies</NavLink>
         {isLoggedIn && (
-          <li className="hover:text-gray-300 cursor-pointer">My Bookings</li>
+        <NavLink to={'/mybookings'} className={({ isActive }) => `hover:text-gray-300 cursor-pointer ${isActive && 'text-gray-300'}`}>My Bookings</NavLink>
         )}
       </ul>
       <div className="flex items-center gap-3 font-semibold">
