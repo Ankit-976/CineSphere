@@ -2,17 +2,12 @@ import { useState } from "react";
 import ShowCard from "./ShowCard";
 import { RiArrowRightLongLine } from "@remixicon/react";
 import { useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
 
 const SelectShow = ({ movie }) => {
   const [selectedShow, setSelectedShow] = useState(null);
   const navigate = useNavigate();
 
   const shows = movie?.shows || [];
-  const time = new Date(selectedShow?.startTime).toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
 
   return (
     <div className="h-fit p-25 flex flex-col gap-10">
@@ -25,8 +20,7 @@ const SelectShow = ({ movie }) => {
           {selectedShow && (
             <button
               onClick={() => {
-                navigate("/");
-                toast.success(`Booking Done of ${time} show`);
+                navigate(`/selectseat/${selectedShow.id}`);
               }}
               className="bg-red-600 h-11 rounded-full px-5 flex items-center justify-center text-[0.9rem] font-[Nunito] tracking-tight font-semibold cursor-pointer gap-2 shadow-[0_0_30px_rgba(239,68,68,0.5)]"
             >

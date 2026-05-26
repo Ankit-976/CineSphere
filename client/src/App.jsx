@@ -7,6 +7,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import Movie from "./pages/Movie";
 import BookShow from "./pages/BookShow";
+import SelectSeat from "./pages/SelectSeat";
 
 const App = () => {
   const location = useLocation();
@@ -23,6 +24,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/movies" element={<Movie />} />
         <Route path="/bookshow/:movieId" element={<BookShow />} />
+        <Route path="/selectseat/:showId" element={<SelectSeat />} />
       </Routes>
     </div>
   );
