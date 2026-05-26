@@ -192,7 +192,7 @@ const Home = () => {
                       currentIndex === 0 ? movies.length - 1 : currentIndex - 1,
                     )
                   }
-                  className="block bg-[#373434] h-fit w-fit p-2 rounded-full border border-[#505050] cursor-pointer"
+                  className="block bg-[#101010] h-fit w-fit p-2 rounded-full border border-[#505050] cursor-pointer"
                 >
                   <RiArrowLeftSLine />
                 </span>
@@ -202,7 +202,7 @@ const Home = () => {
                       currentIndex === movies.length - 1 ? 0 : currentIndex + 1,
                     )
                   }
-                  className="block bg-[#373434] h-fit w-fit p-2 rounded-full border border-[#505050] cursor-pointer"
+                  className="block bg-[#101010] h-fit w-fit p-2 rounded-full border border-[#505050] cursor-pointer"
                 >
                   <RiArrowRightSLine />
                 </span>
