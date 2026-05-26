@@ -67,7 +67,7 @@ useEffect(() => {
         {!isLoggedIn ? (
           <>
             <Link to={"/login"}>
-              <button className="bg-black/10 border-gray-800 border-[0.1px] rounded-full py-2 px-6 flex items-center justify-center text-[0.9rem] cursor-pointer">
+              <button className="bg-[#101010] border-gray-800 border-[0.1px] rounded-full py-2 px-6 flex items-center justify-center text-[0.9rem] cursor-pointer">
                 Login
               </button>
             </Link>
