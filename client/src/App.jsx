@@ -4,8 +4,9 @@ import BackBtn from './components/BackBtn'
 import Login from './pages/Login'
 
 import { Routes, Route, useLocation } from "react-router-dom";
-import Layout from "./Layout";
+import Home from "./pages/Home";
 import Movie from "./pages/Movie";
+import BookShow from "./pages/BookShow";
 
 const App = () => {
   const location = useLocation();
@@ -16,10 +17,11 @@ const App = () => {
       {location.pathname !== "/" && <BackBtn />}
       {!hideNavbar && <Navbar />}
       <Routes>
-        <Route path="/" element={<Layout />} />
+        <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/movies" element={<Movie />} />
+        <Route path="/bookshow/:movieId" element={<BookShow />} />
       </Routes>
     </div>
   );

@@ -1,5 +1,4 @@
 const prisma = require("../config/db");
-const { get } = require("../routes/movie.route");
 
 async function addMovie(req, res) {
   const {
@@ -69,7 +68,7 @@ async function getMovies(req, res) {
   }
 }
 
-async function hideMovie(req, res) {
+async function hideMovieById(req, res) {
   try {
     const movie = await prisma.movie.update({
       where: {
@@ -88,6 +87,26 @@ async function hideMovie(req, res) {
     res
       .status(400)
       .json({ message: "Error hiding movie", error: error.message });
+  }
+}
+
+async function getMovieById(req, res) {
+  try {
+    const movie = await prisma.movie.findUnique({
+      where: {
+        id: Number(req.params.id),
+      },
+      include: {
+        shows: true,
+      },
+    });
+
+    res.status(200).json({
+      message: "Movie fetched successfully",
+      movie: movie,
+    });
+  } catch (error) {
+    console.log(error);
   }
 }
 
@@ -183,7 +202,8 @@ async function getShows(req, res) {
 module.exports = {
   addMovie,
   getMovies,
-  hideMovie,
+  hideMovieById,
+  getMovieById,
   addShow,
   getShows,
 };
