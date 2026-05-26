@@ -13,6 +13,6 @@ router.get('/getMovie/:id', authMiddleware.authUserMiddleware, movieController.g
 // Shows Routes
 
 router.post('/addShow', authMiddleware.authAdminMiddleware, movieController.addShow);
-router.get('/getShows/:movieId', movieController.getShows);
+router.get('/getSeats/:showId', movieController.getSeats);
 
 module.exports = router

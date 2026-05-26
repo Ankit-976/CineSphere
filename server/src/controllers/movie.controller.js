@@ -106,7 +106,7 @@ async function getMovieById(req, res) {
       movie: movie,
     });
   } catch (error) {
-    console.log(error);
+    res.status(400).json({message: "Error fetching movie"})
   }
 }
 
@@ -175,27 +175,22 @@ async function addShow(req, res) {
   }
 }
 
-async function getShows(req, res) {
+async function getSeats(req, res) {
   try {
-    const id = req.params.movieId;
-
-    const shows = await prisma.show.findMany({
-      where: {
-        movieId: parseInt(id),
-      },
-      include: {
-        seats: true,
-      },
-    });
+    
+    const seats = await prisma.seat.findMany({
+      where:{
+        showId: Number(req.params.showId),
+      }
+    })
 
     res.status(200).json({
-      message: "Shows fetched successfully",
-      shows: shows,
-    });
+      message: "Seats fetched successfully",
+      seats: seats
+    })
   } catch (error) {
-    res
-      .status(400)
-      .json({ message: "Error fetching shows", error: error.message });
+    res.status(400).json({message:"Error fetching seats"})
+    
   }
 }
 
@@ -205,5 +200,5 @@ module.exports = {
   hideMovieById,
   getMovieById,
   addShow,
-  getShows,
+  getSeats,
 };
