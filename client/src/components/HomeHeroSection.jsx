@@ -165,9 +165,11 @@ const Home = () => {
                   Book Tickets
                 </button>
               </Link>
-              <button className="border-gray-800 border-[0.1px] rounded-full py-2 px-7 flex items-center justify-center text-[0.9rem] cursor-pointer bg-black/10">
-                More Details
-              </button>
+              <Link to={`/bookshow/${currentMovie?.id}`}>
+                <button className="border-gray-800 border-[0.1px] rounded-full py-2 px-7 flex items-center justify-center text-[0.9rem] cursor-pointer bg-black/10">
+                  More Details
+                </button>
+              </Link>
             </div>
             <div className="flex justify-between items-center">
               <div className="flex gap-2">
