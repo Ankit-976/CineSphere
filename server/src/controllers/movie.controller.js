@@ -127,23 +127,23 @@ async function addShow(req, res) {
 
     const seats = [];
 
-    for (let row of ["A", "B"]) {
-      for (let i = 1; i <= 10; i++) {
-        seats.push({
-          seatNumber: `${row}${i}`,
-          type: "Premium",
-          price: 250,
-          showId: newShow.id,
-        });
-      }
-    }
-
-    for (let row of ["C", "D", "E", "F"]) {
+    for (let row of ["A", "B", "C"]) {
       for (let i = 1; i <= 10; i++) {
         seats.push({
           seatNumber: `${row}${i}`,
           type: "Normal",
           price: 150,
+          showId: newShow.id,
+        });
+      }
+    }
+
+    for (let row of ["D", "E", "F"]) {
+      for (let i = 1; i <= 10; i++) {
+        seats.push({
+          seatNumber: `${row}${i}`,
+          type: "Premium",
+          price: 250,
           showId: newShow.id,
         });
       }
