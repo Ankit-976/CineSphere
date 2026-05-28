@@ -33,7 +33,7 @@ async function createBooking(req, res) {
     let totalPrice = 0;
 
     for (let seat of seats) {
-      totalPrice += seat.price;
+      totalPrice += seat.price + 30;
     }
 
     const booking = await prisma.$transaction(async (tx) => {

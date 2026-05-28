@@ -8,6 +8,7 @@ const SelectSeat = () => {
   const { showId } = useParams();
   const [seats, setSeats] = useState([]);
   const [selectedSeats, setSelectedSeats] = useState([]);
+  const [booking, setBooking] = useState('')
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -65,6 +66,23 @@ const SelectSeat = () => {
 
     const conveniencefee = selectedSeats.length * 30 || 0;
     const totalPay = subtotal + conveniencefee;
+
+    const handleBookingSeats = async () => {
+      const seatIds = []
+      selectedSeats.map((seat) => {
+        seatIds.push(seat.id)
+      })
+      const data = {
+        showId: Number(showId),
+        seatIds: seatIds
+      }
+      
+
+      const response = await api.post('/booking/', data)
+      setBooking(response.data.booking)
+      setSelectedSeats([])
+    }
+    
 
   return (
     <div className="px-25 pt-35 flex flex-col gap-10">
@@ -202,8 +220,8 @@ const SelectSeat = () => {
             </div>
             <button
               onClick={() => {
-                navigate('/')
-                toast.success(`Your payable is ${totalPay}`) 
+                handleBookingSeats()
+                toast.success(`Your payable is ${totalPay} of seats `) 
               }}
               className={`
               flex items-center font-[Nunito] cursor-pointer text-[1rem] p-2.5 font-bold rounded-full justify-center gap-2
