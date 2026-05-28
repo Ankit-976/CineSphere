@@ -9,6 +9,7 @@ import Movie from "./pages/Movie";
 import BookShow from "./pages/BookShow";
 import SelectSeat from "./pages/SelectSeat";
 import MyBookings from "./pages/MyBookings";
+import TicketPage from "./pages/TicketPage";
 
 const App = () => {
   const location = useLocation();
@@ -27,6 +28,7 @@ const App = () => {
         <Route path="/bookshow/:movieId" element={<BookShow />} />
         <Route path="/selectseat/:showId" element={<SelectSeat />} />
         <Route path="/mybookings" element={<MyBookings />} />
+        <Route path="/mybookings/ticket/:bookingId" element={<TicketPage />} />
       </Routes>
     </div>
   );
