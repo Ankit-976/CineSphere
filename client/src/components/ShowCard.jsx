@@ -1,8 +1,6 @@
+import { FormatTime } from "../utils/FormatTime";
+
 const ShowCard = ({ show, selectedShow, setSelectedShow }) => {
-  const time = new Date(show.startTime).toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
   return (
     <div
       onClick={() =>
@@ -16,7 +14,7 @@ const ShowCard = ({ show, selectedShow, setSelectedShow }) => {
         SCREEN 1
       </span>
       <span className="font-[Nunito] text-[1rem] tracking-wider text-white">
-        {time}
+        {FormatTime(show.startTime)}
       </span>
     </div>
   );

@@ -82,7 +82,7 @@ useEffect(() => {
             className="rounded-full py-2 px-3 flex bg-black/80 border-[0.1px] border-gray-800 gap-2 items-center justify-center cursor-pointer"
             onClick={userDropdown}
           >
-            <span className=" flex justify-center items-center rounded-full bg-red-500 h-6 w-6">
+            <span className=" flex justify-center items-center rounded-full bg-red-500 shadow-[0_0_20px_rgba(239,68,68,0.7)] h-6 w-6">
               {user.username.slice(0, 1).toUpperCase()}
             </span>
             <span>{user.username}</span>

@@ -2,22 +2,24 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import api from "../utils/Api";
 import { RiCoupon2Line } from "@remixicon/react";
+import { FormatTime } from '../utils/FormatTime'
 import toast from 'react-hot-toast'
 
 const SelectSeat = () => {
   const { showId } = useParams();
   const [seats, setSeats] = useState([]);
   const [selectedSeats, setSelectedSeats] = useState([]);
+  const [show, setShow] = useState(null)
   const [booking, setBooking] = useState('')
   const navigate = useNavigate()
 
   useEffect(() => {
-    const getShowSeats = async () => {
-      const response = await api.get(`/movie/getSeats/${showId}`);
-      setSeats(response.data.seats);
-    };
-
-    getShowSeats();
+    const getShowAndSeats = async () => {
+      const response = await api.get(`/movie/getShow/${showId}`);
+      setShow(response.data.show)
+      setSeats(response.data.show.seats)
+    }
+    getShowAndSeats()
   }, [showId]);
 
   const sortedSeats = [...seats].sort((a, b) => {
@@ -81,9 +83,10 @@ const SelectSeat = () => {
       const response = await api.post('/booking/', data)
       setBooking(response.data.booking)
       setSelectedSeats([])
+      console.log(booking);
     }
     
-
+    
   return (
     <div className="px-25 pt-35 flex flex-col gap-10">
       <div className="flex flex-col gap-2">
@@ -91,10 +94,10 @@ const SelectSeat = () => {
           SEAT SELECTION
         </span>
         <span className="text-6xl font-[Bebas_Neue] tracking-wide">
-          MIDNIGHT ARCHIVE
+          {show?.movie?.title}
         </span>
         <div className="font-[Nunito] tracking-wider text-[#909090]">
-          CINELUX IMAX - Screen 1{"(IMAX)"} . Today 1:30 PM
+          CINELUX IMAX - Screen 1{"(IMAX)"} . Today {FormatTime(show?.startTime)}
         </div>
       </div>
       <div className="flex gap-10 ">
@@ -176,10 +179,10 @@ const SelectSeat = () => {
               YOUR ORDER
             </span>
             <span className="font-[Bebas_Neue] text-3xl tracking-wider">
-              MIDNIGHT ARCHIVE
+              {show?.movie?.title}
             </span>
             <div className="font-[Nunito] text-[0.85rem] font-semibold tracking-wide text-[#909090]">
-              CINELUX IMAX <br /> Screen 1{"(IMAX)"} . Today 10:00 PM
+              CINELUX IMAX <br /> Screen 1{"(IMAX)"} . Today {FormatTime(show?.startTime)}
             </div>
           </div>
           <div className="flex flex-col p-6 gap-3">
@@ -207,7 +210,7 @@ const SelectSeat = () => {
             )}
             <hr className="text-[#303030]" />
             <div className="flex justify-between items-center text-[0.9rem] text-[#909090] font-[Nunito]">
-              <span>{"Subtotal (0)"}</span>
+              <span>{`Subtotal (${selectedSeats.length})`}</span>
               <span>₹{subtotal}</span>
             </div>
             <div className="flex justify-between items-center text-[0.9rem] text-[#909090] font-[Nunito]">
@@ -221,6 +224,7 @@ const SelectSeat = () => {
             <button
               onClick={() => {
                 handleBookingSeats()
+                navigate('/mybookings')
                 toast.success(`Your payable is ${totalPay} of seats `) 
               }}
               className={`
@@ -241,6 +245,5 @@ const SelectSeat = () => {
     </div>
   );
 };
-// shadow-[0_0_20px_rgba(239,68,68,0.7)]
 
 export default SelectSeat;
