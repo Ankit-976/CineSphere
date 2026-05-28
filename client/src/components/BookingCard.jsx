@@ -5,7 +5,7 @@ const BookingCard = ({ booking }) => {
   
   return (
     <div className="bg-[#101010] h-65 rounded-2xl flex gap-5 py-5 px-7">
-      <div className=" w-40 rounded-xl bg-cover shrink-0 bg-top" style={{backgroundImage: `url(${booking.show.movie.porterUrl})`}}></div>
+      <div className=" w-40 rounded-xl bg-cover shrink-0 bg-top" style={{backgroundImage: `url(${booking.show.movie.posterUrl})`}}></div>
       <div className="flex items-center justify-between w-full">
         <div className="flex flex-col gap-1 font-[Nunito]">
             <div className="text-[0.82rem] text-[#555] font-semibold">CONFIRMED</div>

@@ -18,6 +18,8 @@ const MyBookings = () => {
     fetchBookings();
   }, []);
 
+  if (!user) return null;
+
   return (
     <div className="p-30 flex flex-col gap-10">
       <div className="flex flex-col gap-1">
