@@ -38,7 +38,7 @@ const BookShow = ({ movie }) => {
 
   return (
     <>
-      <div className="min-h-screen bg-green-500/20">
+      <div className="min-h-screen">
         <div
           className="h-screen bg-cover bg-top flex items-end justify-start px-20 py-10"
           style={{

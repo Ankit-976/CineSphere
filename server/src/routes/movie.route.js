@@ -8,11 +8,11 @@ const authMiddleware = require('../middlewares/auth.middleware')
 router.post('/addMovie', authMiddleware.authAdminMiddleware, movieController.addMovie);
 router.get('/getMovies', movieController.getMovies);
 router.post('/hideMovie/:id', authMiddleware.authAdminMiddleware, movieController.hideMovieById)
-router.get('/getMovie/:id', authMiddleware.authUserMiddleware, movieController.getMovieById)
+router.get('/getMovie/:id', movieController.getMovieById)
 
 // Shows Routes
 
 router.post('/addShow', authMiddleware.authAdminMiddleware, movieController.addShow);
-router.get('/getShow/:showId', authMiddleware.authUserMiddleware, movieController.getShowById)
+router.get('/getShow/:showId', movieController.getShowById)
 
 module.exports = router
