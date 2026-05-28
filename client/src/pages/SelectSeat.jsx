@@ -131,7 +131,7 @@ const SelectSeat = () => {
                                 h-8 w-8 cursor-pointer  flex justify-center items-center border text-[0.8rem] font-[Nunito]  border-[#303030] rounded-xl
                                 ${
                                   seat.isBooked
-                                    ? "bg-[#202020] cursor-not-allowed"
+                                    ? "bg-[#202020] cursor-not-allowed text-[#555]"
                                     : selectedSeats.some(
                                           (s) => s.id === seat.id,
                                         )

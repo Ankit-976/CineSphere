@@ -6,35 +6,68 @@ const BookShow = ({ movie }) => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.fromTo(movieCardRef.current, 
-      {
-        y:10,
-        opacity:0
-      },
-      {
-        y:0,
-        opacity:1,
-        duration:0.7,
-        ease: 'power3.inOut'
-      }
-        );
-      gsap.fromTo('.movieInfor', 
+      gsap.fromTo(
+        movieCardRef.current,
         {
-            y:10,
-            opacity:0
+          y: 10,
+          opacity: 0,
         },
         {
-            y: 0,
-            opacity:1,
-            duration:1,
-            ease:'power3.inOut',
-            stagger: 0.1
-        }
-    )
+          y: 0,
+          opacity: 1,
+          duration: 0.7,
+          ease: "power3.inOut",
+        },
+      );
+      gsap.fromTo(
+        ".movieInfor",
+        {
+          y: 10,
+          opacity: 0,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          ease: "power3.inOut",
+          stagger: 0.1,
+        },
+      );
     });
 
     return () => ctx.revert();
   }, []);
+
+  const handleMouseMove = (e) => {
+
+    const card = movieCardRef.current;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateY = ((x - centerX) / centerX) * 10;
+    const rotateX = -((y - centerY) / centerY) * 10;
+
+    gsap.to(card, {
+      rotateX,
+      rotateY,
+      transformPerspective: 1000,
+      duration: 0.4,
+      ease: "power2.out",
+    });
+  };
+
+  const handleMouseLeave = () => {
+    gsap.to(movieCardRef.current, {
+      rotateX: 0,
+      rotateY: 0,
+
+      duration: 0.5,
+
+      ease: "power3.out",
+    });
+  };
 
   return (
     <>
@@ -42,13 +75,14 @@ const BookShow = ({ movie }) => {
         <div
           className="h-screen bg-cover bg-top flex items-end justify-start px-20 py-10"
           style={{
-            backgroundImage:
-              `url(${movie.posterUrl})`,
+            backgroundImage: `url(${movie.posterUrl})`,
           }}
         >
           <div
             ref={movieCardRef}
-            className=" h-95 w-65 rounded-3xl border border-[#303030] bg-cover bg-center shrink-0"
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            className=" h-95 w-65 rounded-3xl border transform-gpu border-[#303030] bg-cover bg-center shrink-0"
             style={{
               backgroundImage: `url(${movie.posterUrl})`,
             }}
@@ -58,14 +92,18 @@ const BookShow = ({ movie }) => {
               <span className="movieInfor text-red-500 font-[Nunito] font-bold text-[1rem] tracking-wide">
                 {movie.genre}
               </span>
-              <span className="movieInfor font-[Bebas_Neue] text-7xl">{movie.title}</span>
+              <span className="movieInfor font-[Bebas_Neue] text-7xl">
+                {movie.title}
+              </span>
             </div>
             <p className="movieInfor font-[Nunito] italic text-[#dad1d1]">
               Some deals are sealed in shadow.
             </p>
             <div className="movieInfor font-[Nunito] text-[1rem] flex gap-5">
               <span>⭐️ 8.4/10</span>
-              <span>{Math.floor(movie.duration/60)}h{" "}{movie.duration%60}m</span>
+              <span>
+                {Math.floor(movie.duration / 60)}h {movie.duration % 60}m
+              </span>
               <span>{movie.language}</span>
               <span>{movie.releaseDate}</span>
             </div>
