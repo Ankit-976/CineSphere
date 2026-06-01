@@ -121,57 +121,56 @@ const Home = () => {
       <div className="h-200">
         <div
           ref={bgRef}
-          className="h-full  w-full bg-cover  bg-top"
+          className="h-full  w-full bg-cover bg-center lg:bg-top"
           style={{ backgroundImage: `url(${currentMovie?.posterUrl})` }}
         >
-          <div className="text-white h-full flex flex-col backdrop-brightness-75 px-25 py-20 justify-end gap-6">
+          <div className="text-white h-full flex flex-col backdrop-brightness-75 px-7 py-15 lg:px-25 lg:py-20 justify-end gap-6">
             <div className="flex gap-5 font-['Nunito'] text-[0.85rem] tracking-wider">
               <span className="font-bold text-red-500 flex items-center gap-2">
                 <span className="font-bold">•</span> NOW SHOWING
               </span>
-              <span className="font-bold text-[#8a8a8a]">
-                {currentMovie?.genre.toUpperCase() || "Genre"}
+              <span className="font-bold text-[#d5d5d5]">
+                {currentMovie?.genre.toUpperCase()}
               </span>
             </div>
             <div>
               <span
                 ref={titleRef}
-                className="block text-9xl tracking-wide font-bold font-[Bebas_Neue]"
+                className="block text-7xl lg:text-9xl tracking-wide font-bold font-[Bebas_Neue]"
               >
-                {currentMovie?.title || "Movie Title"}
+                {currentMovie?.title}
               </span>
             </div>
-            <div className="w-[40%] font-[Nunito]">
+            <div className="lg:w-[40%] w-[80%] font-[Nunito]">
               <span
                 ref={descRef}
-                className=" block font-semibold text-[#8a8a8a]"
+                className=" block font-semibold text-[#d5d5d5]"
               >
-                {currentMovie?.description || "Movie Description"}
+                {currentMovie?.description}
               </span>
             </div>
             <div
               ref={ratingTimeRef}
-              className="flex gap-5 text-[#8a8a8a] font-[Nunito] text-[0.9rem] font-bold"
+              className="flex gap-5 text-[#d5d5d5] font-[Nunito] text-[0.9rem] font-bold"
             >
               <span>⭐️ 8.2/10</span>
               <span>
                 {currentMovie?.duration
-                  ? `${Math.floor(currentMovie.duration / 60)}h${
+                  && `${Math.floor(currentMovie.duration / 60)}h${
                       currentMovie.duration % 60
-                    }m`
-                  : "Duration"}
+                    }m`}
               </span>
-              <span>{currentMovie?.language || "Language"}</span>
+              <span>{currentMovie?.language}</span>
             </div>
-            <div className="flex gap-3 font-semibold">
+            <div className="flex flex-col lg:flex-row gap-3 font-semibold">
               <Link to={`/bookshow/${currentMovie?.id}`}>
-                <button className="bg-red-600 rounded-full py-2 px-5 flex items-center justify-center text-[0.9rem] cursor-pointer gap-2">
+                <button className="bg-red-600 rounded-full py-3 lg:py-2 px-5 flex w-full lg:w-fit items-center justify-center text-[0.9rem] cursor-pointer gap-2">
                   <RiArrowRightCircleFill size="20" />
                   Book Tickets
                 </button>
               </Link>
               <Link to={`/bookshow/${currentMovie?.id}`}>
-                <button className="border-gray-800 border-[0.1px] rounded-full py-2 px-7 flex items-center justify-center text-[0.9rem] cursor-pointer bg-black/10">
+                <button className="border-gray-800 border-[0.1px] w-full lg:w-fit rounded-full py-3 lg:py-2 px-7 flex items-center justify-center text-[0.9rem] cursor-pointer bg-black/50">
                   More Details
                 </button>
               </Link>
@@ -192,7 +191,7 @@ const Home = () => {
                   );
                 })}
               </div>
-              <div className="flex gap-1">
+              <div className="lg:flex gap-1 hidden ">
                 <span
                   onClick={() =>
                     changeMovie(

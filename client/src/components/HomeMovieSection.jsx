@@ -8,14 +8,14 @@ function MovieSection() {
 
   if(loading) return null;
   return (
-    <div className="flex flex-col gap-25">
-      <div className="px-25 flex flex-col gap-10">
+    <div className="flex flex-col gap-15 lg:gap-25 pb-10 lg:pb-0">
+      <div className="px-7 lg:px-25 flex flex-col gap-7 lg:gap-10">
         <div className="flex flex-col gap-3">
-          <span className="text-red-500 flex gap-1 text-[0.9rem] items-center font-[Nunito] font-bold tracking-wide">
+          <span className="text-red-500 flex gap-1 text-[0.85rem] lg:text-[0.9rem] items-center font-[Nunito] font-bold tracking-wide">
             <RiSparklingFill size="17" />
             TRENDING NOW
           </span>
-          <span className="text-6xl  tracking-wide font-[Bebas_Neue]">
+          <span className="lg:text-6xl text-4xl  tracking-wide font-[Bebas_Neue]">
             THE SEATS FILL BEFORE THE CREDITS ROLL.
           </span>
         </div>
@@ -25,12 +25,12 @@ function MovieSection() {
           })}
         </div>
       </div>
-      <div className="px-25 flex flex-col gap-10">
+      <div className="px-7 lg:px-25 flex flex-col gap-7 lg:gap-10">
         <div className="flex flex-col gap-3">
-          <span className="text-red-500 text-[0.9rem] font-[Nunito] font-bold tracking-wide">
+          <span className="text-red-500 text-[0.85rem] lg:text-[0.9rem] font-[Nunito] font-bold tracking-wide">
             NOW SHOWING
           </span>
-          <span className="text-6xl  tracking-wide font-[Bebas_Neue]">
+          <span className="text-4xl lg:text-6xl  tracking-wide font-[Bebas_Neue]">
             IN THEATRES.
           </span>
         </div>

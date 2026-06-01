@@ -6,6 +6,8 @@ import AuthContext from "../contexts/AuthContext";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import  gsap  from 'gsap'
 import MovieContext from "../contexts/MovieContext";
+import { RiMenuUnfold2Line } from '@remixicon/react'
+import MobileDrawer from './MobileDrawer';
 
 gsap.registerPlugin(ScrollTrigger);
 const Navbar = () => {
@@ -17,6 +19,8 @@ const Navbar = () => {
   const userDropdown = () => {
     setisUserDropActive(!isUserDropActive);
   };
+
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
 useEffect(() => {
   if (loading) return;
@@ -43,7 +47,7 @@ useEffect(() => {
   return (
     <div 
     ref={navbarRef}
-    className="py-2 z-999 flex justify-between items-center px-25 fixed top-0 left-0 w-full">
+    className="py-2 z-999 flex justify-between items-center px-5 lg:px-25 fixed top-0 left-0 w-full">
       <a
         href="/"
         className="flex items-center justify-center gap-2 cursor-pointer group"
@@ -57,14 +61,14 @@ useEffect(() => {
           CineSphere
         </span>
       </a>
-      <ul className="flex gap-15 text-[0.9rem] text-gray-500 font-semibold">
+      <ul className="lg:flex gap-15 text-[0.9rem] hidden text-gray-500 font-semibold">
         <NavLink to={'/'} className={({ isActive }) => `hover:text-gray-300 cursor-pointer ${isActive && 'text-gray-300'}`}>Home</NavLink>
         <NavLink to={'/movies'} className={({ isActive }) => `hover:text-gray-300 cursor-pointer ${isActive && 'text-gray-300'}`}>Movies</NavLink>
         {isLoggedIn && (
         <NavLink to={'/mybookings'} className={({ isActive }) => `hover:text-gray-300 cursor-pointer ${isActive && 'text-gray-300'}`}>My Bookings</NavLink>
         )}
       </ul>
-      <div className="flex items-center gap-3 font-semibold">
+      <div className="lg:flex hidden items-center gap-3 font-semibold">
         {!isLoggedIn ? (
           <>
             <Link to={"/login"}>
@@ -97,6 +101,15 @@ useEffect(() => {
           isUserDropActive={isUserDropActive}
         />
       )}
+      <button onClick={() => setIsDrawerOpen(true)} className="lg:hidden flex items-center justify-center p-2">
+        <RiMenuUnfold2Line size={20} />
+      </button>
+      <MobileDrawer
+        isOpen={isDrawerOpen}
+        onClose={() => setIsDrawerOpen(false)}
+        isLoggedIn={isLoggedIn}
+        user={user}
+      />
     </div>
   );
 };

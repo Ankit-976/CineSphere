@@ -5,7 +5,7 @@ const HomeSkeleton = () => {
     <>
       <div className="h-200">
         <div className="h-full  w-full">
-          <div className=" h-full flex flex-col px-25 py-20 justify-end gap-6">
+          <div className=" h-full flex flex-col px-7 lg:px-25 py-20 justify-end gap-6">
             <div className="flex gap-5 text-[0.85rem] tracking-wider">
                 <Skeleton highlightColor="#444"  baseColor="#333" width={100} height={25}/>
             </div>
@@ -24,15 +24,15 @@ const HomeSkeleton = () => {
                 <Skeleton highlightColor="#444" baseColor="#333" width={70} height={20}/>
                 <Skeleton highlightColor="#444" baseColor="#333" width={70} height={20}/>
             </div>
-            <div className="flex gap-3 font-semibold">
-                <Skeleton highlightColor="#444" baseColor="#333"  width={150} height={30}/>
-                <Skeleton highlightColor="#444" baseColor="#333" width={150} height={30}/>
+            <div className="flex gap-3 flex-col lg:flex-row font-semibold">
+                <Skeleton highlightColor="#444" baseColor="#333" height={35}/>
+                <Skeleton highlightColor="#444" baseColor="#333" height={35}/>
             </div>
             <div className="flex justify-between items-center">
               <div className="flex ">
                 <Skeleton highlightColor="#444" baseColor="#333" containerClassName="flex-1" height={10} width={270}/>
               </div>
-              <div className="flex gap-3">
+              <div className="lg:flex gap-3 hidden">
                 <Skeleton highlightColor="#444" height={40} width={40} baseColor="#333" circle="true" containerClassName="flex-1"/>
                 <Skeleton highlightColor="#444" height={40} width={40} baseColor="#333" circle="true" containerClassName="flex-1"/>
               </div>

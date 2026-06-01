@@ -12,3 +12,7 @@ body::-webkit-scrollbar{
 .moviescrollbar::-webkit-scrollbar{
     display: none;
 }
+
+.genreScroll::-webkit-scrollbar{
+    display: none;
+}

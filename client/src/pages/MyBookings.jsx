@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import BookingCard from "../components/BookingCard";
 import api from "../utils/Api";
 import { useContext, useEffect, useState } from "react";
@@ -8,6 +8,7 @@ import { RiCoupon2Line } from "@remixicon/react";
 const MyBookings = () => {
   const [bookings, setBookings] = useState([]);
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchBookings = async () => {
@@ -18,7 +19,9 @@ const MyBookings = () => {
     fetchBookings();
   }, []);
 
-  if (!user) return null;
+  if (!user) {
+    navigate('/')
+  };
 
   return (
     <div className="p-30 flex flex-col gap-10">
