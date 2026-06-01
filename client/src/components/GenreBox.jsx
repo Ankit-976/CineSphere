@@ -1,4 +1,10 @@
+import { useContext } from "react";
+import MovieContext from "../contexts/MovieContext";
+
 function GenreBox() {
+  const { loading } = useContext(MovieContext)
+
+  if(loading) return null;
   return (
     <div className=" flex flex-col gap-8 w-[85%] mx-auto rounded-2xl p-7 bg-[#101010] border border-[#252525]">
       <div>

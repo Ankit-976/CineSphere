@@ -6,6 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import AuthProvider from "./contexts/AuthProvider";
 import MovieProvider from "./contexts/MovieProvider.jsx";
+import 'react-loading-skeleton/dist/skeleton.css'
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

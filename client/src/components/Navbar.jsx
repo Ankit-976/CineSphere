@@ -5,10 +5,12 @@ import { Link, NavLink } from "react-router-dom";
 import AuthContext from "../contexts/AuthContext";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import  gsap  from 'gsap'
+import MovieContext from "../contexts/MovieContext";
 
 gsap.registerPlugin(ScrollTrigger);
 const Navbar = () => {
-  const { isLoggedIn, setIsLoggedIn, loading, user } = useContext(AuthContext);
+  const { isLoggedIn, setIsLoggedIn, user } = useContext(AuthContext);
+  const { loading } = useContext(MovieContext)
   const [isUserDropActive, setisUserDropActive] = useState(false);
   const navbarRef = useRef(null);
 
@@ -37,7 +39,6 @@ useEffect(() => {
   return () => ctx.revert();
 }, [loading]);
 
-  if (loading) return null;
 
   return (
     <div 

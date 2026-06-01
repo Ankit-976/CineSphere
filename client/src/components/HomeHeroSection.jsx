@@ -7,9 +7,10 @@ import { useEffect, useState, useRef, useContext } from "react";
 import { gsap } from "gsap";
 import MovieContext from "../contexts/MovieContext";
 import { Link } from "react-router-dom";
+import HomeSkeleton from "./Skeletons/HomeSkeleton";
 
 const Home = () => {
-  const { moviesfetched } = useContext(MovieContext);
+  const { moviesfetched, loading } = useContext(MovieContext);
   const [movies, setMovies] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const titleRef = useRef(null);
@@ -109,6 +110,10 @@ const Home = () => {
     return () => clearInterval(interval);
   }, [movies, currentIndex]);
 
+  if(loading) {
+    return <HomeSkeleton />
+  }
+
   const currentMovie = movies[currentIndex];
 
   return (
@@ -121,7 +126,7 @@ const Home = () => {
         >
           <div className="text-white h-full flex flex-col backdrop-brightness-75 px-25 py-20 justify-end gap-6">
             <div className="flex gap-5 font-['Nunito'] text-[0.85rem] tracking-wider">
-              <span className="font-bold text-red-500 ">
+              <span className="font-bold text-red-500 flex items-center gap-2">
                 <span className="font-bold">•</span> NOW SHOWING
               </span>
               <span className="font-bold text-[#8a8a8a]">

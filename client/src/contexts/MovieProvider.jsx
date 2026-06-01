@@ -4,6 +4,7 @@ import MovieContext from './MovieContext'
 
 const MovieProvider = ({ children }) => {
     const [moviesfetched, setMoviesfetched] = useState([])
+    const [loading, setLoading] = useState(true)
     
     useEffect(() => {
       try {
@@ -11,6 +12,7 @@ const MovieProvider = ({ children }) => {
             const response = await api.get('/movie/getMovies');
 
             setMoviesfetched(response.data.movies)
+            setLoading(false)
         }
         fetchMovies()
       } catch (error) {
@@ -23,7 +25,9 @@ const MovieProvider = ({ children }) => {
   return (
     <MovieContext.Provider
     value={{
-        moviesfetched
+        moviesfetched,
+        loading,
+        setLoading
     }}
     >
         { children }

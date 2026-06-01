@@ -4,7 +4,9 @@ import { useContext } from "react";
 import { RiSparklingFill } from "@remixicon/react";
 
 function MovieSection() {
-  const { moviesfetched } = useContext(MovieContext);
+  const { moviesfetched, loading } = useContext(MovieContext);
+
+  if(loading) return null;
   return (
     <div className="flex flex-col gap-25">
       <div className="px-25 flex flex-col gap-10">
