@@ -33,7 +33,7 @@ useEffect(() => {
       ease: "none",
       scrollTrigger: {
         trigger: document.body,
-        start: "top+=200 top",
+        start: "top+=100 top",
         end: "top+=100 top",
         scrub: 1,
       }
