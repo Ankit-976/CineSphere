@@ -78,21 +78,21 @@ const Register = () => {
   };
 
   return (
-    <div className="flex">
-      <div className="flex items-center justify-center gap-2 cursor-pointer group absolute top-15 right-15">
+    <div className="flex h-dvh lg:h-fit ">
+      <div className="flex items-center justify-center gap-2 cursor-pointer group absolute lg:top-15 lg:right-15 top-5 right-5">
         <img
           src={logo}
           alt="Logo"
-          className=" rounded-xl transition-shadow duration-300 group-hover:shadow-[0_0_18px_rgba(239,68,68,0.8)]"
+          className=" rounded-xl h-7 lg:h-auto transition-shadow duration-300 group-hover:shadow-[0_0_18px_rgba(239,68,68,0.8)]"
         />
-        <span className="block text-2xl font-['Stack_Sans_Notch']">
+        <span className="block text-xl lg:text-2xl font-['Stack_Sans_Notch']">
           CineSphere
         </span>
       </div>
-      <div className="w-[50%] flex justify-center items-center">
-        <div className="flex flex-col w-[60%] h-[60%] gap-7">
+      <div className="lg:w-[50%] flex justify-center items-center w-full  h-full lg:h-auto">
+        <div className="flex flex-col lg:w-[60%] lg:h-[60%] gap-7  w-full px-7 pt-25 lg:pt-0 lg:px-0">
           <div className="flex flex-col gap-2" id="formHeading">
-            <span className="text-red-500/80 font-semibold font-['Nunito']  text-[0.8rem] tracking-widest">
+            <span className="text-red-500 font-semibold font-['Nunito']  text-[0.8rem] tracking-widest">
               NEW FACE
             </span>
             <span className="text-5xl font-bold font-['Bebas_Neue'] tracking-wider">
@@ -109,7 +109,7 @@ const Register = () => {
             <div className="flex flex-col gap-1 inputs">
               <label
                 htmlFor="name"
-                className="text-white/60 text-[0.75rem] font-semibold font-['Nunito'] tracking-widest"
+                className="text-white/60 lg:text-[0.75rem] font-semibold font-['Nunito'] tracking-widest"
               >
                 USERNAME
               </label>
@@ -130,7 +130,7 @@ const Register = () => {
             <div className="flex flex-col gap-1 inputs">
               <label
                 htmlFor="email"
-                className="text-white/60 text-[0.75rem] font-semibold font-['Nunito'] tracking-widest"
+                className="text-white/60 lg:text-[0.75rem] font-semibold font-['Nunito'] tracking-widest"
               >
                 EMAIL
               </label>
@@ -151,7 +151,7 @@ const Register = () => {
             <div className="flex flex-col gap-1 inputs">
               <label
                 htmlFor="email"
-                className="text-white/60 text-[0.75rem] font-semibold font-['Nunito'] tracking-widest"
+                className="text-white/60 lg:text-[0.75rem] font-semibold font-['Nunito'] tracking-widest"
               >
                 Role
               </label>
@@ -165,7 +165,7 @@ const Register = () => {
             <div className="flex flex-col gap-1 inputs">
               <label
                 htmlFor="password"
-                className="text-white/60 text-[0.75rem] font-semibold font-['Nunito'] tracking-widest"
+                className="text-white/60 lg:text-[0.75rem] font-semibold font-['Nunito'] tracking-widest"
               >
                 PASSWORD
               </label>
@@ -186,7 +186,7 @@ const Register = () => {
             <div className="flex flex-col gap-1 inputs">
               <label
                 htmlFor="confirmpassword"
-                className="text-white/60 text-[0.75rem] font-semibold font-['Nunito'] tracking-widest"
+                className="text-white/60 lg:text-[0.75rem] font-semibold font-['Nunito'] tracking-widest"
               >
                 CONFIRM PASSWORD
               </label>
@@ -208,7 +208,7 @@ const Register = () => {
         </div>
       </div>
       <div
-        className="h-screen w-[50%] bg-cover bg-center"
+        className="h-screen w-[50%] bg-cover bg-center hidden lg:block"
         style={{ backgroundImage: `url(${bg})` }}
       >
         <div className=" p-20 h-full flex flex-col justify-end gap-4">

@@ -3,7 +3,7 @@ import Skeleton from "react-loading-skeleton";
 const HomeSkeleton = () => {
   return (
     <>
-      <div className="h-200">
+      <div className="h-dvh">
         <div className="h-full  w-full">
           <div className=" h-full flex flex-col px-7 lg:px-25 py-20 justify-end gap-6">
             <div className="flex gap-5 text-[0.85rem] tracking-wider">

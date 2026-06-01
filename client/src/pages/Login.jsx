@@ -61,9 +61,9 @@ const Login = () => {
   };
 
   return (
-    <div className="flex">
+    <div className="flex h-dvh lg:h-fit">
       <div
-        className="h-screen w-[50%]"
+        className="h-screen w-[50%] hidden lg:block"
       >
         <div className="flex items-center justify-center gap-2 cursor-pointer group absolute top-15 right-15">
           <img
@@ -85,8 +85,8 @@ const Login = () => {
           </span>
         </div>
       </div>
-      <div className="w-[50%] flex justify-center items-center">
-        <div className="flex flex-col w-[60%] h-[60%] gap-10">
+      <div className="lg:w-[50%] flex justify-center items-center w-full  h-full lg:h-auto">
+        <div className="flex flex-col lg:w-[60%] lg:h-[60%] gap-10 w-full px-7 pt-25 lg:pt-0 lg:px-0">
           <div className="flex flex-col gap-3" id="formHeading">
             <span className="text-red-500/80 font-semibold font-['Nunito']  text-[0.8rem] tracking-widest">
               WELCOME BACK
@@ -105,7 +105,7 @@ const Login = () => {
             <div className="flex flex-col gap-1 inputs">
               <label
                 htmlFor="email"
-                className="text-white/60 text-[0.75rem] font-semibold font-['Nunito'] tracking-widest"
+                className="text-white/60 lg:text-[0.75rem] font-semibold font-['Nunito'] tracking-widest"
               >
                 EMAIL
               </label>
@@ -126,7 +126,7 @@ const Login = () => {
             <div className="flex flex-col gap-1 inputs">
               <label
                 htmlFor="password"
-                className="text-white/60 text-[0.75rem] font-semibold font-['Nunito'] tracking-widest"
+                className="text-white/60 lg:text-[0.75rem] font-semibold font-['Nunito'] tracking-widest"
               >
                 PASSWORD
               </label>

@@ -16,7 +16,7 @@ const MovieCard = ({ movie }) => {
             TRENDING
           </span>
         </div>
-        <div className="flex flex-col  gap-2 p-3 translate-y-20 group-hover:translate-0 transition-transform duration-400 ease-in-out">
+        <div className="flex flex-col  gap-2 p-3 lg:translate-y-20 group-hover:translate-0 transition-transform duration-400 ease-in-out">
           <span className="text-[0.85rem] font-[Nunito] tracking-wide text-white/90 font-bold">
             {Math.floor(movie.duration / 60)}h {movie.duration % 60}m{" "}
             <span className="text-[0.6rem]">•</span> {movie.genre}

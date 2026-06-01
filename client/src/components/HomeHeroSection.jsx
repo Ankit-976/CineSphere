@@ -124,7 +124,7 @@ const Home = () => {
           className="h-full  w-full bg-cover bg-center lg:bg-top"
           style={{ backgroundImage: `url(${currentMovie?.posterUrl})` }}
         >
-          <div className="text-white h-full flex flex-col backdrop-brightness-75 px-7 py-15 lg:px-25 lg:py-20 justify-end gap-6">
+          <div className="text-white h-full flex flex-col backdrop-brightness-75 px-7 lg:px-25 py-20 justify-end gap-6">
             <div className="flex gap-5 font-['Nunito'] text-[0.85rem] tracking-wider">
               <span className="font-bold text-red-500 flex items-center gap-2">
                 <span className="font-bold">•</span> NOW SHOWING

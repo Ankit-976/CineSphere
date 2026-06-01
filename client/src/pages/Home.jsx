@@ -7,7 +7,7 @@ const HomeLayout = () => {
   return (
     <>
       <HomeHeroSection />
-      <div className="w-full lg:-translate-y-18 -translate-y-10 bg-transparent">
+      <div className="w-full px-7 lg:px-0 lg:-translate-y-18 -translate-y-10 bg-transparent">
       <GenreBox />
       </div>
       <HomeMovieSection />

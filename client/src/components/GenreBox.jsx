@@ -6,7 +6,7 @@ function GenreBox() {
 
   if(loading) return null;
   return (
-    <div className="flex flex-col gap-5 lg:gap-8 w-[85%] mx-auto rounded-2xl lg:p-7 p-5 bg-[#101010] border border-[#252525]">
+    <div className="flex flex-col gap-5 lg:gap-8 lg:w-[85%] mx-auto rounded-2xl lg:p-7 p-5 bg-[#101010] border border-[#252525]">
       <div>
         <div className="flex flex-col">
           <span className="text-red-500 font-bold font-[Nunito] text-[0.85rem] lg:text-[0.9rem]">
