@@ -88,7 +88,7 @@ const SelectSeat = () => {
     
     
   return (
-    <div className="px-25 pt-35 flex flex-col gap-10">
+    <div className="lg:px-25 px-7 lg:pt-35 pt-30 pb-10 flex flex-col gap-10">
       <div className="flex flex-col gap-2">
         <span className="text-[0.85rem] font-[Nunito] font-bold tracking-wide text-red-500">
           SEAT SELECTION
@@ -100,26 +100,26 @@ const SelectSeat = () => {
           CINELUX IMAX - Screen 1{"(IMAX)"} . Today {FormatTime(show?.startTime)}
         </div>
       </div>
-      <div className="flex gap-10 ">
-        <div className="flex flex-col items-end gap-5 px-15 pt-0">
-          <div className="w-full flex flex-col items-end gap-3">
+      <div className="flex gap-10 flex-col lg:flex-row items-center ">
+        <div className="flex flex-col lg:items-end items-center gap-5 lg:px-15 pt-0">
+          <div className="w-full flex flex-col lg:items-end items-center gap-3">
             <div className="w-[90%] bg-white/70 h-1.5 rounded-t-full flex justify-center"></div>
             <div className=" w-full flex justify-center">
-              <span className="font-[Nunito] tracking-[0.4em] font-bold text-[0.8rem] text-[#777]">
+              <span className="font-[Nunito] tracking-[0.4em] font-bold text-[0.7rem] lg:text-[0.8rem] text-[#777]">
                 ALL EYES THIS WAY - SCREEN
               </span>
             </div>
           </div>
-          <div className="flex flex-col p-5 pr-30 gap-6">
+          <div className="flex flex-col lg:p-5 lg:pr-30  gap-4 lg:gap-6">
             {Object.entries(groupedSeats).map(([row, seats]) => {
               return (
-                <div key={row} className="">
-                  <div className=" flex gap-30">
-                    <span className="w-8 h-8 text-[#777] font-[Nunito] flex justify-center items-center bg-">
+                <div key={row}>
+                  <div className=" flex gap-3 lg:gap-30">
+                    <span className="w-8 h-8 hidden text-[#777] font-[Nunito] lg:flex justify-center items-center ">
                       {row}
                     </span>
 
-                    <div className="flex gap-5">
+                    <div className="flex gap-2 lg:gap-5">
                       {seats.map((seat) => {
                         return (
                           <div key={seat.id}>
@@ -128,7 +128,7 @@ const SelectSeat = () => {
                                 handleSelectSeats(seat);
                               }}
                               className={`
-                                h-8 w-8 cursor-pointer  flex justify-center items-center border text-[0.8rem] font-[Nunito]  border-[#303030] rounded-xl
+                                lg:w-8 lg:h-8 h-7 w-7 cursor-pointer  flex justify-center items-center border text-[0.8rem] font-[Nunito]  border-[#303030] rounded-xl
                                 ${
                                   seat.isBooked
                                     ? "bg-[#202020] cursor-not-allowed text-[#555]"
@@ -143,19 +143,20 @@ const SelectSeat = () => {
                               {seat.seatNumber.slice(1)}
                             </div>
                             {seat.seatNumber.slice(1) == 5 && (
-                              <div className="w-15"></div>
+                              <div className="w-10 lg:w-15"></div>
                             )}
                           </div>
                         );
                       })}
                     </div>
                   </div>
-                  {row == "C" && <div className="h-5"></div>}
-                  {row == "F" && <div className="h-5"></div>}
+                  {row == "C" && <div className=" items-center mt-2 h-5 flex justify-center text-[#999]">₹ 150</div>}
+                  {row == "F" && <div className=" items-center mt-2 h-5 flex justify-center text-[#999]">₹ 250</div>}
+                  {row == "R" && <div className=" items-center mt-2 h-5 flex justify-center text-[#999]">₹ 500</div>}
                 </div>
               );
             })}
-            <div className=" flex justify-end">
+            <div className=" flex lg:justify-end justify-center">
               <div className="w-[80%]  flex justify-center font-[Nunito] text-[0.85rem] items-center gap-6">
                 <div className="flex justify-center items-center gap-2">
                   <span className=" h-6 w-6  flex bg-black justify-center items-center border text-[0.8rem] font-[Nunito]  border-[#303030] rounded-lg"></span>
@@ -173,7 +174,7 @@ const SelectSeat = () => {
             </div>
           </div>
         </div>
-        <div className="w-90 h-fit bg-[#101010] rounded-2xl py-2 border shrink-0 border-[#303030] ">
+        <div className="w-85 lg:w-90 h-fit bg-[#101010] rounded-2xl py-2 border shrink-0 border-[#303030] ">
           <div className="flex flex-col border-b border-[#303030] px-6 pt-5 pb-4 gap-1">
             <span className="text-[0.9rem] font-[Nunito] font-bold tracking-wide text-red-500">
               YOUR ORDER
