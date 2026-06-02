@@ -87,9 +87,9 @@ const BookShow = ({ movie }) => {
 
   return (
     <>
-      <div className="min-h-dvh">
+      <div className="h-screen">
         <div
-          className="h-screen lg:bg-cover lg:bg-top flex flex-col lg:flex-row lg:items-end lg:justify-start lg:px-20 lg:py-10 px-7 items-center justify-end"
+          className="pt-30 lg:h-screen h-fit lg:bg-cover lg:bg-top flex flex-col lg:flex-row lg:items-end lg:justify-start gap-3 lg:gap-0 lg:px-20 lg:py-10 px-7  items-center justify-end"
           style={{
             backgroundImage: isLargeScreen ? `url(${movie?.posterUrl})` : "none",
           }}
@@ -98,7 +98,7 @@ const BookShow = ({ movie }) => {
             ref={movieCardRef}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
-            className=" lg:h-95 lg:w-65 h-100 w-70 rounded-3xl border transform-gpu border-[#303030] bg-cover bg-center shrink-0"
+            className="h-95 w-65 rounded-3xl border transform-gpu border-[#303030] bg-cover bg-center shrink-0"
             style={{
               backgroundImage: `url(${movie?.posterUrl})`,
             }}

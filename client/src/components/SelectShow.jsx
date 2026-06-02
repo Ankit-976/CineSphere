@@ -10,7 +10,7 @@ const SelectShow = ({ movie }) => {
   const shows = movie?.shows || [];
 
   return (
-    <div className="h-fit lg:p-25 px-7 pb-7 flex flex-col gap-5 lg:gap-10">
+    <div className=" lg:p-25 px-7 pb-7 flex flex-col gap-5 lg:gap-10">
       <div className="flex flex-col gap-3">
         <span className="lg:text-[0.9rem] text-[0.85rem] text-red-500 font-[Nunito] font-bold tracking-wider">
           SHOW TIMES
