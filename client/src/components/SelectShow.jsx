@@ -10,23 +10,23 @@ const SelectShow = ({ movie }) => {
   const shows = movie?.shows || [];
 
   return (
-    <div className="h-fit p-25 flex flex-col gap-10">
+    <div className="h-fit lg:p-25 px-7 pb-7 flex flex-col gap-5 lg:gap-10">
       <div className="flex flex-col gap-3">
-        <span className="text-[0.9rem] text-red-500 font-[Nunito] font-bold tracking-wider">
-          SHOWTIMES
+        <span className="lg:text-[0.9rem] text-[0.85rem] text-red-500 font-[Nunito] font-bold tracking-wider">
+          SHOW TIMES
         </span>
-        <div className="text-7xl flex justify-between font-[Bebas_Neue] tracking-wide items-center">
-          PICK YOUR SCREENING
+        <div className="lg:text-7xl text-6xl flex justify-between font-[Bebas_Neue] tracking-wide lg:items-center items-end">
+          <span>PICK YOUR SCREENING</span>
           {selectedShow && (
             <button
               onClick={() => {
                 navigate(`/selectseat/${selectedShow.id}`);
               }}
-              className="bg-red-600 h-11 rounded-full px-5 flex items-center justify-center text-[0.9rem] font-[Nunito] tracking-tight font-semibold cursor-pointer gap-2 shadow-[0_0_30px_rgba(239,68,68,0.5)]"
+              className="bg-red-600 h-11 rounded-full px-5 flex items-center justify-center text-[0.9rem] font-[Nunito] -translate-y-2 lg:translate-y-0 tracking-tight font-semibold cursor-pointer gap-2 shadow-[0_0_30px_rgba(239,68,68,0.5)]"
             >
-              CONTINUE
-              <RiArrowRightLongLine size={20} />
-              PICKS SEATS
+              <span className="hidden lg:flex">CONTINUE</span>
+              <RiArrowRightLongLine size={20} className="order-2"/>
+              <span className="order-1">PICKS SEATS</span>
             </button>
           )}
         </div>

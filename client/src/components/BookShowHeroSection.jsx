@@ -1,8 +1,18 @@
 import gsap from "gsap";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const BookShow = ({ movie }) => {
   const movieCardRef = useRef(null);
+  const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 1024);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsLargeScreen(window.innerWidth >= 1024);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -69,26 +79,32 @@ const BookShow = ({ movie }) => {
     });
   };
 
+  const date = new Date(movie?.releaseDate).toLocaleDateString('en-IN', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric'
+  })
+
   return (
     <>
-      <div className="min-h-screen">
+      <div className="min-h-dvh">
         <div
-          className="h-screen bg-cover bg-top flex items-end justify-start px-20 py-10"
+          className="h-screen lg:bg-cover lg:bg-top flex flex-col lg:flex-row lg:items-end lg:justify-start lg:px-20 lg:py-10 px-7 items-center justify-end"
           style={{
-            backgroundImage: `url(${movie.posterUrl})`,
+            backgroundImage: isLargeScreen ? `url(${movie?.posterUrl})` : "none",
           }}
         >
           <div
             ref={movieCardRef}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
-            className=" h-95 w-65 rounded-3xl border transform-gpu border-[#303030] bg-cover bg-center shrink-0"
+            className=" lg:h-95 lg:w-65 h-100 w-70 rounded-3xl border transform-gpu border-[#303030] bg-cover bg-center shrink-0"
             style={{
-              backgroundImage: `url(${movie.posterUrl})`,
+              backgroundImage: `url(${movie?.posterUrl})`,
             }}
           ></div>
-          <div className="flex flex-col gap-5 h-95 px-5 justify-center">
-            <div className="flex flex-col gap-3">
+          <div className="flex flex-col lg:gap-5 gap-2 lg:h-95 pb-20  lg:px-5 justify-center">
+            <div className="flex flex-col gap-1 lg:gap-3">
               <span className="movieInfor text-red-500 font-[Nunito] font-bold text-[1rem] tracking-wide">
                 {movie.genre}
               </span>
@@ -96,18 +112,15 @@ const BookShow = ({ movie }) => {
                 {movie.title}
               </span>
             </div>
-            <p className="movieInfor font-[Nunito] italic text-[#dad1d1]">
-              Some deals are sealed in shadow.
-            </p>
-            <div className="movieInfor font-[Nunito] text-[1rem] flex gap-5">
-              <span>⭐️ 8.4/10</span>
-              <span>
+            <div className="movieInfor font-[Nunito] text-[0.9rem] lg:text-[1rem] flex gap-5">
+              <span className="shrink-0">⭐️ 8.4/10</span>
+              <span className="shrink-0">
                 {Math.floor(movie.duration / 60)}h {movie.duration % 60}m
               </span>
-              <span>{movie.language}</span>
-              <span>{movie.releaseDate}</span>
+              <span className="shrink-0">{movie.language}</span>
+              <span className="shrink-0">{date}</span>
             </div>
-            <p className="movieInfor w-[70%] font-[Nunito]">
+            <p className="movieInfor lg:w-[70%] font-[Nunito]">
               {movie.description}
             </p>
           </div>
