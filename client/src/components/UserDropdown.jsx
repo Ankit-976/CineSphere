@@ -4,7 +4,7 @@ import AuthContext from "../contexts/AuthContext";
 import { useContext, useEffect, useRef } from "react";
 import { gsap } from "gsap";
 
-const UserDropdown = ({ setisUserDropActive, isUserDropActive }) => {
+const UserDropdown = ({ setisUserDropActive, isUserDropActive, toggleButtonRef }) => {
   const { isLoggedIn, setIsLoggedIn, user } = useContext(AuthContext);
   const dropdownRef = useRef(null);
   const logoutBtn = async () => {
@@ -41,6 +41,27 @@ const UserDropdown = ({ setisUserDropActive, isUserDropActive }) => {
       });
     }
   }, [isUserDropActive]);
+
+  useEffect(() => {
+    if (!isUserDropActive) return;
+
+    const handleClickOutside = (event) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target) &&
+        !(toggleButtonRef && toggleButtonRef.current && toggleButtonRef.current.contains(event.target))
+      ) {
+        setisUserDropActive(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isUserDropActive, setisUserDropActive, toggleButtonRef]);
+
   return (
     <>
       {isLoggedIn && (
@@ -50,7 +71,7 @@ const UserDropdown = ({ setisUserDropActive, isUserDropActive }) => {
           className="absolute bg-black top-15 right-25 flex flex-col font-semibold gap-2 w-55 rounded-xl border-[0.1px] border-gray-600/50 font-['Nunito']"
         >
           <div className="flex flex-col px-5 pt-3">
-            <span className="text-[0.88rem]">{user.username}</span>
+            <span className="text-[0.88rem]">{user.username.charAt(0).toUpperCase() + user.username.slice(1)}</span>
             <span className="text-[0.85rem] text-gray-500/70">
               {user.email}
             </span>

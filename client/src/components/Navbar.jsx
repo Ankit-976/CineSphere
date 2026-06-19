@@ -15,6 +15,7 @@ const Navbar = () => {
   const { loading } = useContext(MovieContext)
   const [isUserDropActive, setisUserDropActive] = useState(false);
   const navbarRef = useRef(null);
+  const userDropdownBtnRef = useRef(null);
 
   const userDropdown = () => {
     setisUserDropActive(!isUserDropActive);
@@ -84,13 +85,14 @@ useEffect(() => {
           </>
         ) : (
           <button
+            ref={userDropdownBtnRef}
             className="rounded-full py-2 px-3 flex bg-black/80 border-[0.1px] border-gray-800 gap-2 items-center justify-center cursor-pointer"
             onClick={userDropdown}
           >
             <span className=" flex justify-center items-center rounded-full bg-red-500 shadow-[0_0_20px_rgba(239,68,68,0.7)] h-6 w-6">
               {user.username.slice(0, 1).toUpperCase()}
             </span>
-            <span>{user.username}</span>
+            <span>{user.username.charAt(0).toUpperCase() + user.username.slice(1)}</span>
           </button>
         )}
       </div>
@@ -99,6 +101,7 @@ useEffect(() => {
           setIsLoggedIn={setIsLoggedIn}
           setisUserDropActive={setisUserDropActive}
           isUserDropActive={isUserDropActive}
+          toggleButtonRef={userDropdownBtnRef}
         />
       )}
       <button onClick={() => setIsDrawerOpen(true)} className="lg:hidden flex items-center justify-center p-2">
