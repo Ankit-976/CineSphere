@@ -8,7 +8,7 @@ import { RiCoupon2Line } from "@remixicon/react";
 const MyBookings = () => {
   const [bookings, setBookings] = useState([]);
   const { user } = useContext(AuthContext);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchBookings = async () => {
@@ -20,8 +20,8 @@ const MyBookings = () => {
   }, []);
 
   if (!user) {
-    navigate('/')
-  };
+    navigate("/");
+  }
 
   return (
     <div className="p-30 flex flex-col gap-10">
@@ -59,9 +59,11 @@ const MyBookings = () => {
             <p className="font-[Nunito] text-[#777] font-semibold tracking-wide">
               Your bookings will land here as soon as you grab your first seat.
             </p>
-            <button className="bg-red-600 h-11 rounded-full px-5 flex items-center justify-center text-[1rem] font-[Nunito] tracking-tight font-bold cursor-pointer gap-2 shadow-[0_0_30px_rgba(239,68,68,0.5)]">
-              Find a movie
-            </button>
+            <Link to={"/movies"}>
+              <button className="bg-red-600 h-11 rounded-full px-5 flex items-center justify-center text-[1rem] font-[Nunito] tracking-tight font-bold cursor-pointer gap-2 shadow-[0_0_30px_rgba(239,68,68,0.5)]">
+                Find a movie
+              </button>
+            </Link>
           </div>
         )}
       </div>
